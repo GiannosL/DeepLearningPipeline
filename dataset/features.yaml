@@ -1,15 +1,15 @@
 training:
-  petal_length: "../dataset/training/feature_petal_length.csv"
-  petal_width: "../dataset/training/feature_petal_width.csv"
-  sepal_length: "../dataset/training/feature_sepal_length.csv"
-  sepal_width: "../dataset/training/feature_sepal_width.csv"
+  petal_length: "dataset/training/feature_petal_length.csv"
+  petal_width: "dataset/training/feature_petal_width.csv"
+  sepal_length: "dataset/training/feature_sepal_length.csv"
+  sepal_width: "dataset/training/feature_sepal_width.csv"
 
-  condition: "../dataset/training/target.csv"
+  condition: "dataset/training/target.csv"
 
 testing:
-  petal_length: "../dataset/testing/feature_petal_length.csv"
-  petal_width: "../dataset/testing/feature_petal_width.csv"
-  sepal_length: "../dataset/testing/feature_sepal_length.csv"
-  sepal_width: "../dataset/testing/feature_sepal_width.csv"          
+  petal_length: "dataset/testing/feature_petal_length.csv"
+  petal_width: "dataset/testing/feature_petal_width.csv"
+  sepal_length: "dataset/testing/feature_sepal_length.csv"
+  sepal_width: "dataset/testing/feature_sepal_width.csv"          
 
-  condition: "../dataset/testing/target.csv"
+  condition: "dataset/testing/target.csv"
