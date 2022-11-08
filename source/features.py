@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 
-yaml_file = "../dataset/features.yaml"
+yaml_file = "dataset/features.yaml"
 with open(yaml_file, "r") as f:
     data_dictionary = yaml.full_load(f)
 
