@@ -18,7 +18,43 @@ The deep-learning infrastructure used in the pipeline is based on the <em>PyTorc
 
 <p>
 In order to use the pipeline, the input data needs to be organised in a specific (yet simple) way.
+In my repository I am using the iris dataset as an exampleto demonstrate how the input files
+ should look.
 </p>
+
+<p>
+Simply put, after performing the train-test split of your dataset you should create a 
+<em>.csv file</em> for each of the features. The features for the training dataset should
+go into directory under datasets called "training" (<em>"dataset/training"</em>) and the test
+data should go under <em>"dataset/testing"</em>.
+</p>
+
+<h4>features.yaml</h4>
+<p>
+Under the "dataset" directory a YAML file should contain the paths to the input features in the
+following format:
+</p>
+
+````
+training:
+    <feature_1>: "/path/to/file_1.csv"
+    <feature_2>: "/path/to/file_2.csv"
+
+    condition: "/path/to/target_file.csv"
+
+testing:
+    <feature_1>: "/path/to/file_1.csv"
+    <feature_2>: "/path/to/file_2.csv"
+
+    condition: "/path/to/target_file.csv"
+````
+
+<p>
+The target file should contain the class for each individual encoded as 0,1,... <br>
+The variable pointing to the target file should be named <strong>"condition"</strong> always. 
+The variables for the features do not matter in our naming scheme.
+</p>
+
 
 <h3>Configuration</h3>
 
