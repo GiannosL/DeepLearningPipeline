@@ -2,7 +2,7 @@ import torch
 import pandas as pd
 import torch.nn as nn
 import matplotlib.pyplot as plt
-from predictions import Predictions
+from .predictions import Predictions
 
 
 def convert_to_tensor(df: pd.DataFrame, target=False):

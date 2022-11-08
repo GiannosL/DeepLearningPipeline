@@ -1,6 +1,7 @@
 import pandas as pd
-from features import Feature, Input_data
 from sklearn.preprocessing import StandardScaler
+
+from .features import Feature, Input_data
 
 
 def generate_datasets(feature_list):
