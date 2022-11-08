@@ -50,7 +50,7 @@ class Predictions:
         eigvals = pca.explained_variance_ratio_
         return pcs, eigvals
     
-    def plot(self):
+    def plot(self, plt_name):
         if self.y_true.empty:
             return 0
         
@@ -68,5 +68,5 @@ class Predictions:
         ax[0].set_xlabel(f"PC-1, {np.round(eigvals[0]*100, 3)}%", fontsize=12)
         ax[1].set_xlabel(f"PC-1, {np.round(eigvals[0]*100, 3)}%", fontsize=12)
         
-        plt.savefig("results.png", dpi=1000)
+        plt.savefig(plt_name, dpi=1000)
         plt.clf()
