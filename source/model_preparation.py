@@ -15,7 +15,7 @@ def convert_to_tensor(df: pd.DataFrame, target=False):
 def train_model(X, y, model, epochs=50, itta=0.01, 
                 criterion=nn.CrossEntropyLoss(), 
                 optimizer=torch.optim.Adam,
-                plot_loss=False):
+                plot_loss=False, plot_name="training_loss.png"):
 
     X = convert_to_tensor(X)
     y = convert_to_tensor(y, target=True)
@@ -37,7 +37,7 @@ def train_model(X, y, model, epochs=50, itta=0.01,
         optimizer.step()
     
     if plot_loss:
-        plot_loss_history(epochs, loss_history)
+        plot_loss_history(epochs, loss_history, plot_name)
     
     return model, loss_history
 
@@ -54,7 +54,7 @@ def make_prediction(X, model, y: pd.DataFrame() = pd.DataFrame()):
     return Predictions(data=X, y_true=y, y_pred=y_pred)
 
 
-def plot_loss_history(epochs, losses, save_fn=True, plt_name="training_loss.png"):
+def plot_loss_history(epochs, losses, plt_name, save_fn=True):
     plt.figure(figsize=(10, 7))
     plt.ylim((0, 1))
     plt.plot(range(1, epochs+1), losses)
