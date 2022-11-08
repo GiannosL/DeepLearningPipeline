@@ -82,7 +82,7 @@ class Input_data:
 
         return principal_components, eigenvalues
 
-    def plot_principal_components(self, save_path, a=1, b=2, normalize=True):
+    def plot_principal_components(self, save_path, train_test_flag="training", a=1, b=2, normalize=True):
         plt.figure(figsize=(10, 7)) 
         a = f"PC-{a}"
         b = f"PC-{b}"
@@ -121,5 +121,5 @@ class Input_data:
         
         plt.xlabel(f"{a}, {np.round(eigvals[0]*100, 2)}", fontsize=12)
         plt.ylabel(f"{b}, {np.round(eigvals[1]*100, 2)}", fontsize=12)
-        plt.savefig(save_path, dpi=1200)
+        plt.savefig(f"{save_path}{train_test_flag}_data_pcs.png", dpi=1200)
         plt.clf()
