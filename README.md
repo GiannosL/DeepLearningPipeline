@@ -7,11 +7,14 @@ The pipeline has some basic data exploration features along with the option to g
 The prediction results come along with some rudimentary statistics as well as the ability to vizualized them easily.
  This pipeline was built with the goal of providing a template which can be easily expanded upon.
 </p>
+
 <p>
-The deep-learning infrastructure used in the pipeline is based on the <em>PyTorch</em> framework.
+The deep-learning infrastructure used in the pipeline is based on the <em>PyTorch</em> framework. It 
+consists of a Deep Neural Network with three hidden layers. The number of input nodes is automatically
+adjusted to the number of input features and the number of output nodes is automatically adjusted by the number of classes.
 </p>
 
-<br> <hr>
+<hr>
 <h2>Use guide</h2>
 
 <h3>Data set-up</h3>
@@ -54,7 +57,6 @@ The target file should contain the class for each individual encoded as 0,1,... 
 The variable pointing to the target file should be named <strong>"condition"</strong> always. 
 The variables for the features do not matter in our naming scheme.
 </p>
-
 
 <h3>Configuration</h3>
 
