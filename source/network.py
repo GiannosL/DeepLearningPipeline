@@ -7,12 +7,14 @@ class ANN(nn.Module):
 
     def __init__(self, 
                  in_features=4, 
-                 h1 = 12,
-                 h2 = 12,
-                 h3 = 12,
-                 out_features=3):
+                 h1 = 12, h2 = 12, h3 = 12,
+                 out_features=3,
+                 name="Pythagoras"):
 
         super().__init__()
+        # Model name
+        self.name = name
+
         #
         self.in_features = in_features
         self.h1 = h1
