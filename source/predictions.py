@@ -37,9 +37,12 @@ class Predictions:
         self.ppv = len(correct_positives/all_positives)
         self.npv = len(correct_negatives/all_negatives)
         
-        print(f"Accuracy: {self.accuracy}")
-        print(f"Positive pred. value: {self.ppv}")
-        print(f"Negative pred. value: {self.npv}")
+        print("\n-------------------------------------------------------------------")
+        print(f"Correct predictions / all: {correct} / {y_pred.shape[0]}")
+        print(f"Test prediction accuracy: {self.accuracy}")
+        print(f"Test positive pred. value: {self.ppv}")
+        print(f"Test negative pred. value: {self.npv}")
+        print("-------------------------------------------------------------------\n")
 
     def pca(self):
         n_feat = self.data.shape[1]
