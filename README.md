@@ -1,4 +1,4 @@
-<h1>Multi-perceptron for classification pipeline</h1>
+<h1>Multi-layer perceptron for classification pipeline</h1>
 
 <h2>Introduction</h2>
 <p>
