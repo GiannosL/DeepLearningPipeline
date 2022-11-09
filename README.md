@@ -14,7 +14,6 @@ consists of a Deep Neural Network with three hidden layers. The number of input 
 adjusted to the number of input features and the number of output nodes is automatically adjusted by the number of classes.
 </p>
 
-<hr>
 <h2>Use guide</h2>
 
 <h3>Data set-up</h3>
