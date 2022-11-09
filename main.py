@@ -11,14 +11,15 @@ with open("model_configuration.yaml", "r") as f:
 # create output
 try:
     os.mkdir(config["work_directory"])
+    print(f"\n[ ] Creating \"{config['work_directory']}\"!\n[ ] Proceeding to read input data...")
 except:
-    print(f"Directory {config['work_directory']} already exists!\nProceeding to read input data...")
+    print(f"\n[x] Directory \"{config['work_directory']}\" already exists!\n[ ] Proceeding to read input data...")
 
 # build datasets
 training_set, test_set = generate_datasets(feature_list=config["features"].split(","))
 
 # plot principal components of the dataset
-print("Calculationg PCs of input dataset.\n")
+print("\n[ ] Calculationg PCs of input dataset.\n")
 training_set.plot_principal_components(save_path=config["work_directory"])
 test_set.plot_principal_components(save_path=config["work_directory"], train_test_flag="test")
 
