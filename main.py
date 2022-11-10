@@ -3,6 +3,7 @@ import yaml
 from source.network import ANN
 import source.model_preparation as mp
 from source.data_preparation import generate_datasets, standardize_data
+from source.report_generation import make_report
 
 # read configuration
 with open("model_configuration.yaml", "r") as f:
@@ -39,3 +40,6 @@ trained_model, loss_history = mp.train_model(X=training_set.feature_matrix, y=tr
 # run on test set
 preds = mp.make_prediction(X=test_set.feature_matrix, model=trained_model, y=test_set.target)
 preds.plot(plt_name=f"{config['work_directory']}discrimination_pcs.png")
+
+# generate report
+make_report(config["work_directory"])
