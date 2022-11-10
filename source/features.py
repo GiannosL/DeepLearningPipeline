@@ -115,9 +115,9 @@ class Input_data:
             plt.scatter(pcs[a], pcs[b], c="grey", edgecolors="black")
         
         if normalize:
-            plt.title("Principal components - Standardized", weight="bold", fontsize=16)
+            plt.title(f"{train_test_flag.capitalize()} data - Standardized", weight="bold", fontsize=16)
         else:
-            plt.title("Principal components - Not standardized", weight="bold", fontsize=16)
+            plt.title(f"{train_test_flag.capitalize()} data - Not standardized", weight="bold", fontsize=16)
         
         plt.xlabel(f"{a}, {np.round(eigvals[0]*100, 2)}", fontsize=12)
         plt.ylabel(f"{b}, {np.round(eigvals[1]*100, 2)}", fontsize=12)
