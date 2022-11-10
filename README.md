@@ -86,3 +86,8 @@ in the input layer is equal to the number of features used as input and the numb
 equal to the final number of classes. The number of nodes per hidden layer is calculated during the process of 
 <em>hyper-parameter optimization</em>.
 </p>
+
+<p>
+The step of hyper-parameter optimization (HPO) preceeds the model training. HPO is implemented with the use of
+the Optuna framework. At the moment only the number of nodes per hidden layer is treated as a hyper-parameter. 
+</p>
