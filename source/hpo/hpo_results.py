@@ -28,4 +28,3 @@ class HPO_Study:
         top_n_indices = np.argsort(all_losses)[:n_best_trials]
 
         return 0
-            

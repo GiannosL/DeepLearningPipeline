@@ -1,6 +1,7 @@
 import optuna
-from model_for_hpo import build_mock_model, train_model
 from hpo_results import HPO_Study
+
+from model_for_hpo import build_mock_model, train_model
 
 
 def objective(trial, model=None):
