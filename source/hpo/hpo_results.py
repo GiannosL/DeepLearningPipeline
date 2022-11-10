@@ -10,7 +10,7 @@ class HPO_Study:
         self.loss = best_loss
         self.trials = all_trials
     
-    def hpo_results(self):
+    def show_results(self):
         print("\n-------------------------------------------------------------------")
         print(f"Hyper Parameter Optimization for {self.name}")
         print(f"Number of trials:\t{len(self.trials)}")
