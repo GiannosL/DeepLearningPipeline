@@ -12,6 +12,7 @@ The prediction results come along with some rudimentary statistics as well as th
 The deep-learning infrastructure used in the pipeline is based on the <em>PyTorch</em> framework. It 
 consists of a Deep Neural Network with three hidden layers. The number of input nodes is automatically
 adjusted to the number of input features and the number of output nodes is automatically adjusted by the number of classes.
+<em>At the moment the model can only use continuous variables as input!</em>
 </p>
 
 <h2>Use guide</h2>
@@ -76,3 +77,12 @@ contains <em>two</em> variables:
 ```
 python3 main.py
 ```
+
+
+<h2>Model details</h2>
+<p>
+The neural network has consists of an input layer, three hidden layers and an output layer. The number of nodes 
+in the input layer is equal to the number of features used as input and the number of nodes in the output layer is 
+equal to the final number of classes. The number of nodes per hidden layer is calculated during the process of 
+<em>hyper-parameter optimization</em>.
+</p>
