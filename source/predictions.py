@@ -13,10 +13,6 @@ class Predictions:
             self.y_true = pd.DataFrame()
             self.accuracy = 0
 
-            # positive predictive value and negative predictive value
-            self.ppv = 0
-            self.npv = 0
-
         self.data = data 
         self.y_pred = y_pred
     
@@ -24,24 +20,15 @@ class Predictions:
         results = y_true
         results["prediction"] = y_pred
 
-        results["cond_pred_sum"] = results["condition"] + results["prediction"]
+        results["cond_pred_sub"] = results["condition"] - results["prediction"]
 
-        all_positives = results[results["condition"] == 1]
-        all_negatives = results[results["condition"] == 0]
-
-        correct_positives = len(results[results["cond_pred_sum"] == 2])
-        correct_negatives = len(results[results["cond_pred_sum"] == 0])
-        correct = correct_positives + correct_negatives
+        correct = results[results["cond_pred_sub"] == 0]
         
-        self.accuracy = (correct/y_true.shape[0])*100
-        self.ppv = len(correct_positives/all_positives)
-        self.npv = len(correct_negatives/all_negatives)
+        self.accuracy = (correct.shape[0]/y_true.shape[0])*100
         
         print("\n-------------------------------------------------------------------")
-        print(f"Correct predictions / all: {correct} / {y_pred.shape[0]}")
-        print(f"Test prediction accuracy: {self.accuracy}")
-        print(f"Test positive pred. value: {self.ppv}")
-        print(f"Test negative pred. value: {self.npv}")
+        print(f"Correct predictions / all: {correct.shape[0]} / {y_pred.shape[0]}")
+        print(f"Test prediction accuracy: {self.accuracy}%")
         print("-------------------------------------------------------------------\n")
 
     def pca(self):
