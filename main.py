@@ -1,5 +1,5 @@
-from source.network import ANN
-import source.model_preparation as mp
+from source.model.network import ANN
+import source.model.model_preparation as mp
 from source.setup.setup import setup_run
 from source.report_generation import make_report
 from source.hpo.hyper_param_opt import Hyper_Parameter_Optimization
@@ -18,7 +18,7 @@ training_set.plot_principal_components(save_path=config["work_directory"])
 test_set.plot_principal_components(save_path=config["work_directory"], train_test_flag="test")
 
 # perform hyper parameter optimization
-hpo = Hyper_Parameter_Optimization(training_set, n_trials=100)
+hpo = Hyper_Parameter_Optimization(training_set, n_trials=config["hpo_trials"])
 hpo.data.show_results()
 
 # start up main model
