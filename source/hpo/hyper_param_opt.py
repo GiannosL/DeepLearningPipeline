@@ -50,7 +50,7 @@ class Hyper_Parameter_Optimization:
     def objective(self, trial):
         # set parameters to optimize
         params = {
-            "n_units": trial.suggest_int("u_units", 5, 10),
+            "n_units": trial.suggest_int("n_units", 5, 10),
             "learning_rate": trial.suggest_float("learning_rate", 0.0001, 0.01)
         }
 
