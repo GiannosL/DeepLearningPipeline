@@ -11,8 +11,8 @@ def save_html(save_file, contents):
 
 def edit_main_file(working_directory):
     main_file = read_html(template_name="source/templates/main.html")
-    main_file = main_file.replace("_TRAIN_PC1_PC2_PATH_", f"{working_directory}training_data_pcs.png")
-    main_file = main_file.replace("_TEST_PC1_PC2_PATH_", f"{working_directory}test_data_pcs.png")
+    main_file = main_file.replace("_TRAIN_PC1_PC2_PATH_", f"{working_directory}results/plots/training_data_pcs.png")
+    main_file = main_file.replace("_TEST_PC1_PC2_PATH_", f"{working_directory}results/plots/test_data_pcs.png")
     
     main_file = main_file.replace("main.html", "main_report.html")
     main_file = main_file.replace("model.html", "model_report.html")

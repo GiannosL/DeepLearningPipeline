@@ -36,7 +36,7 @@ training_set, test_set = standardize_data(training_set, test_set)
 trained_model, loss_history = mp.train_model(X=training_set.feature_matrix, y=training_set.target, 
                                              model=model, epochs=200, plot_loss=True, 
                                              itta=hpo.data.param_set["learning_rate"],
-                                             plot_name=f"{config['work_directory']}training_loss.png")
+                                             plot_name=f"{config['work_directory']}results/plots/training_loss.png")
 
 # run on test set
 preds = mp.make_prediction(X=test_set.feature_matrix, model=trained_model, y=test_set.target)
