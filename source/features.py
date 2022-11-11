@@ -121,5 +121,5 @@ class Input_data:
         
         plt.xlabel(f"{a}, {np.round(eigvals[0]*100, 2)}", fontsize=12)
         plt.ylabel(f"{b}, {np.round(eigvals[1]*100, 2)}", fontsize=12)
-        plt.savefig(f"{save_path}{train_test_flag}_data_pcs.png", dpi=1200)
+        plt.savefig(f"{save_path}results/plots/{train_test_flag}_data_pcs.png", dpi=1200)
         plt.clf()

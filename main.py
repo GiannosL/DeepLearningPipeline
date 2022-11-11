@@ -40,7 +40,7 @@ trained_model, loss_history = mp.train_model(X=training_set.feature_matrix, y=tr
 
 # run on test set
 preds = mp.make_prediction(X=test_set.feature_matrix, model=trained_model, y=test_set.target)
-preds.plot(plt_name=f"{config['work_directory']}discrimination_pcs.png")
+preds.plot(plt_name=f"{config['work_directory']}results/plots/discrimination_pcs.png")
 
 # generate report
 make_report(config["work_directory"])

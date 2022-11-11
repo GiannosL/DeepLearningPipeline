@@ -15,7 +15,7 @@ def convert_to_tensor(df: pd.DataFrame, target=False):
 def train_model(X, y, model, epochs=50, itta=0.01, 
                 criterion=nn.CrossEntropyLoss(), 
                 optimizer=torch.optim.Adam,
-                plot_loss=False, plot_name="training_loss.png"):
+                plot_loss=False, plot_name="results/plots/training_loss.png"):
 
     X = convert_to_tensor(X)
     y = convert_to_tensor(y, target=True)
