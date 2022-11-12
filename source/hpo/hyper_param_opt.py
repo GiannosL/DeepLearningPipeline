@@ -1,7 +1,6 @@
 import torch
 import optuna
 import torch.nn as nn
-import torch.nn.functional as F
 
 from source.hpo.hpo_results import HPO_Study
 from source.model.model_preparation import convert_to_tensor
