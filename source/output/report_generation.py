@@ -1,5 +1,7 @@
 import numpy as np
 from source.model.network import ANN
+from source.data.features import Input_data
+
 
 def read_html(template_name):
     with open(template_name, "r") as f:
@@ -12,9 +14,25 @@ def save_html(save_file, contents):
         f.write(contents)
 
 
-def edit_main_file(working_directory):
-    main_file = read_html(template_name="source/templates/main.html")
+def create_html_table_rows(pc_dict_trn, pc_dict_tst):
+    table_str = ""
+    for k in pc_dict_trn.keys():
+        table_str += f"<tr><td>{k}</td><td>{pc_dict_trn[k]}</td><td>{pc_dict_tst[k]}</td></tr>"
     
+    return table_str
+
+
+def edit_main_file(working_directory, trn_data: Input_data, tst_data: Input_data):
+    #
+    training_pc_var_dict = trn_data.pc_variance()
+    test_pc_var_dict = tst_data.pc_variance()
+    #
+    main_file = read_html(template_name="source/templates/main.html")
+
+    #
+    main_file = main_file.replace("_PC_VALUES_", create_html_table_rows(training_pc_var_dict, test_pc_var_dict))
+
+    #
     main_file = main_file.replace("_TRAIN_PC1_PC2_PATH_", f"{working_directory}results/plots/training_data_pcs.png")
     main_file = main_file.replace("_TEST_PC1_PC2_PATH_", f"{working_directory}results/plots/test_data_pcs.png")
     
@@ -58,9 +76,9 @@ def edit_results_file():
     return results_file
 
 
-def make_report(working_directory, model):
+def make_report(working_directory, model, trn_data: Input_data, tst_data: Input_data):
 
-    main_file = edit_main_file(working_directory)
+    main_file = edit_main_file(working_directory, trn_data, tst_data)
     model_file = edit_model_file(working_directory, model)
     results_file = edit_results_file()
 

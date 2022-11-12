@@ -13,7 +13,7 @@
         background-color: #BDC9C9;
       }
 
-      .carousel {
+      #container_1 {
         padding-top: 30px;
       }
     </style>
@@ -36,24 +36,44 @@
             </div>
         </nav>
 
-        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img src="_TRAIN_PC1_PC2_PATH_" class="d-block w-100" alt="...">
-              </div>
-              <div class="carousel-item">
-                <img src="_TEST_PC1_PC2_PATH_" class="d-block w-100" alt="...">
-              </div>
-            </div>
+        <div class="container" id="container_1">
+          <h1>Principal components</h1>
+          <table class="table table-dark">
+            <thead>
+              <tr>
+                <th scope="col">Principal components</th>
+                <th scope="col">Training-set variance (%)</th>
+                <th scope="col">Test-set variance (%)</th>
+              </tr>
+            </thead>
+            <tbody>
+              _PC_VALUES_
+            </tbody>
 
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
+          </table>
+        </div>
+
+        <div class="container">
+          <h2>Data visualization</h2>
+          <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img src="_TRAIN_PC1_PC2_PATH_" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                  <img src="_TEST_PC1_PC2_PATH_" class="d-block w-100" alt="...">
+                </div>
+              </div>
+
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+              </button>
+          </div>
         </div>
         
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" 

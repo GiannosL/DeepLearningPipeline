@@ -44,4 +44,5 @@ preds = mp.make_prediction(X=test_set.feature_matrix, model=trained_model, y=tes
 preds.plot(plt_name=f"{config['work_directory']}results/plots/discrimination_pcs.png")
 
 # generate report
-make_report(config["work_directory"], trained_model)
+make_report(config["work_directory"], model=trained_model,
+            trn_data=training_set, tst_data=test_set)

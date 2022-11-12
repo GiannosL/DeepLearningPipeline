@@ -92,7 +92,7 @@ class Input_data:
 
         # PCA
         pcs, eigvals = self.pca(normalize)
-
+        
         if self.target_flag:
             pc1_null, pc1_alt = [], []
             pc2_null, pc2_alt = [], []
@@ -123,3 +123,10 @@ class Input_data:
         plt.ylabel(f"{b}, {np.round(eigvals[1]*100, 2)}", fontsize=12)
         plt.savefig(f"{save_path}results/plots/{train_test_flag}_data_pcs.png", dpi=1200)
         plt.clf()
+
+    def pc_variance(self):
+        
+        _, variance = self.pca(normalize=True)
+        variance_dict = {f"PC-{i+1}": variance[i] for i in range(len(variance))}
+
+        return variance_dict
