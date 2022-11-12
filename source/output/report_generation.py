@@ -49,6 +49,7 @@ def edit_model_file(working_directory, model: ANN):
     model_file = read_html(template_name="source/templates/model.html")
     
     # model description
+    model_file = model_file.replace("_MODEL_NAME_", model.name)
     model_file = model_file.replace("_B1_", f"{model.in_features} nodes")
     model_file = model_file.replace("_B2_", f"{model.h1} nodes")
     model_file = model_file.replace("_B3_", f"{model.h2} nodes")
