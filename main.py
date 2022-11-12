@@ -30,9 +30,6 @@ model = ANN(in_features=training_set.feature_number,
             learning_rate=hpo.data.param_set["learning_rate"],
             epochs=200)
 
-# give model description
-model.model_description()
-
 # Normalize data
 training_set, test_set = standardize_data(training_set, test_set)
 
