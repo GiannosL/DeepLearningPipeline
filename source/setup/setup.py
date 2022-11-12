@@ -10,9 +10,9 @@ def read_configuration(filename):
 def create_directories(work_dir):
     try:
         os.mkdir(work_dir)
-        print(f"\n[ ] Creating \"{work_dir}\"!")
+        print(f"[ ] Creating \"{work_dir}\"!")
     except:
-        print(f"\n[x] Directory \"{work_dir}\" already exists!")
+        print(f"[x] Directory \"{work_dir}\" already exists!")
 
 
 def setup_run(config_file):
@@ -21,6 +21,7 @@ def setup_run(config_file):
     config = read_configuration(config_file)
 
     # set-up file structure
+    print("\n")
     create_directories(config["work_directory"])
     create_directories(f"{config['work_directory']}/report/")
     create_directories(f"{config['work_directory']}/results/")
