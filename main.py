@@ -26,7 +26,9 @@ model = ANN(in_features=training_set.feature_number,
             h1=hpo.data.param_set["n_units_1"], 
             h2=hpo.data.param_set["n_units_2"], 
             h3=hpo.data.param_set["n_units_3"], 
-            out_features=training_set.class_number)
+            out_features=training_set.class_number, 
+            learning_rate=hpo.data.param_set["learning_rate"],
+            epochs=200)
 
 # give model description
 model.model_description()
@@ -36,8 +38,8 @@ training_set, test_set = standardize_data(training_set, test_set)
 
 # train model, use standardized data
 trained_model, loss_history = mp.train_model(X=training_set.feature_matrix, y=training_set.target, 
-                                             model=model, epochs=200, plot_loss=True, 
-                                             itta=hpo.data.param_set["learning_rate"],
+                                             model=model, epochs=model.epochs, plot_loss=True, 
+                                             itta=model.learning_rate,
                                              plot_name=f"{config['work_directory']}results/plots/training_loss.png")
 
 # run on test set
@@ -45,4 +47,4 @@ preds = mp.make_prediction(X=test_set.feature_matrix, model=trained_model, y=tes
 preds.plot(plt_name=f"{config['work_directory']}results/plots/discrimination_pcs.png")
 
 # generate report
-make_report(config["work_directory"])
+make_report(config["work_directory"], trained_model)

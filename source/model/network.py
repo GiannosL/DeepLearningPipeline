@@ -7,13 +7,20 @@ class ANN(nn.Module):
 
     def __init__(self, 
                  h1, h2, h3,
+                 epochs=50,
                  in_features=4, 
                  out_features=3,
+                 learning_rate = 0.01,
                  name="Pythagoras"):
 
         super().__init__()
         # Model name
         self.name = name
+
+        #
+        self.learning_rate = learning_rate
+        self.epochs = epochs
+        self.training_set_size = None
 
         #
         self.in_features = in_features

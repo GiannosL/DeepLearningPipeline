@@ -17,6 +17,9 @@ def train_model(X, y, model, epochs=50, itta=0.01,
                 optimizer=torch.optim.Adam,
                 plot_loss=False, plot_name="results/plots/training_loss.png"):
 
+    # document the training-set size
+    model.training_set_size = X.shape[0]
+
     X = convert_to_tensor(X)
     y = convert_to_tensor(y, target=True)
     
