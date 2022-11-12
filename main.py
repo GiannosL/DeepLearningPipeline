@@ -3,7 +3,7 @@ import source.model.model_preparation as mp
 from source.setup.setup import setup_run
 from source.output.report_generation import make_report
 from source.hpo.hyper_param_opt import Hyper_Parameter_Optimization
-from source.output.data_preparation import generate_datasets, standardize_data
+from source.data.data_preparation import generate_datasets, standardize_data
 
 
 # read configuration
