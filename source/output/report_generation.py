@@ -70,8 +70,10 @@ def edit_model_file(working_directory, model: ANN):
     return model_file
 
 
-def edit_results_file():
+def edit_results_file(working_directory):
     results_file = read_html(template_name="source/templates/results.html")
+
+    results_file = results_file.replace("_CLASSIFICATION_RESULTS_PC_PLOT_", f"{working_directory}results/plots/discrimination_pcs.png")
 
     results_file = results_file.replace("main.html", "main_report.html")
     results_file = results_file.replace("model.html", "model_report.html")
@@ -83,7 +85,7 @@ def make_report(working_directory, model, trn_data: Input_data, tst_data: Input_
 
     main_file = edit_main_file(working_directory, trn_data, tst_data)
     model_file = edit_model_file(working_directory, model)
-    results_file = edit_results_file()
+    results_file = edit_results_file(working_directory)
 
     #
     save_html(f"{working_directory}report/main_report.html", main_file)
