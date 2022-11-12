@@ -1,6 +1,7 @@
 import numpy as np
 from source.model.network import ANN
 from source.data.features import Input_data
+from source.data.data_preparation import barplot_pc_variance
 
 
 def read_html(template_name):
@@ -31,10 +32,12 @@ def edit_main_file(working_directory, trn_data: Input_data, tst_data: Input_data
 
     #
     main_file = main_file.replace("_PC_VALUES_", create_html_table_rows(training_pc_var_dict, test_pc_var_dict))
+    barplot_pc_variance(working_directory, training_pc_var_dict, test_pc_var_dict)
 
     #
     main_file = main_file.replace("_TRAIN_PC1_PC2_PATH_", f"{working_directory}results/plots/training_data_pcs.png")
     main_file = main_file.replace("_TEST_PC1_PC2_PATH_", f"{working_directory}results/plots/test_data_pcs.png")
+    main_file = main_file.replace("_PC_VARIANCE_", f"{working_directory}results/plots/pc_variance.png")
     
     main_file = main_file.replace("main.html", "main_report.html")
     main_file = main_file.replace("model.html", "model_report.html")

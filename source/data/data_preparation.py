@@ -1,4 +1,6 @@
+import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler
 
 from source.data.features import Feature, Input_data
@@ -31,3 +33,20 @@ def standardize_data(train: Input_data, test: Input_data):
 
 
     return train, test
+
+def barplot_pc_variance(work_dir, trn_dict, tst_dict):
+    trn_list = list(trn_dict.values())
+    tst_list = list(tst_dict.values())
+
+    X = np.arange(len(trn_list))
+
+    fig, ax = plt.subplots(figsize=(10, 7))
+    ax.bar(X+0.00, trn_list, color="black", width=0.25, label="training-set", edgecolor="black")
+    ax.bar(X+0.25, tst_list, color="orange", width=0.25, label="testing-set", edgecolor="black")
+    plt.xticks([i+0.125 for i in range(len(trn_list))], list(trn_dict.keys()))
+    plt.title("Variance percentage covered by the PCs", fontsize=16, weight="bold")
+    plt.xlabel("Principal components", fontsize=12)
+    plt.ylabel("Variance (%)", fontsize=12)
+    plt.legend()
+    plt.ylim(0, 1)
+    plt.savefig(f"{work_dir}results/plots/pc_variance.png", dpi=1200)    
