@@ -17,7 +17,7 @@ class Hyper_Parameter_Optimization:
     def build_mock_model(self, in_features, out_features, params):
         model = nn.Sequential(
             nn.Linear(in_features, params["n_units"]),
-            nn.LeakyReLU(),
+            nn.ReLU(),
             nn.Linear(params["n_units"], out_features),
         )
         return model
