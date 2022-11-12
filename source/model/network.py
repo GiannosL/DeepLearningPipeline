@@ -21,6 +21,7 @@ class ANN(nn.Module):
         self.learning_rate = learning_rate
         self.epochs = epochs
         self.training_set_size = None
+        self.training_loss = None
 
         #
         self.in_features = in_features

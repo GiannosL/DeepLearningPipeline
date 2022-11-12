@@ -42,6 +42,9 @@ def train_model(X, y, model, epochs=50, itta=0.01,
     if plot_loss:
         plot_loss_history(epochs, loss_history, plot_name)
     
+    # document training loss
+    model.training_loss = loss.item()
+    
     return model, loss_history
 
 

@@ -38,6 +38,8 @@ def edit_model_file(working_directory, model: ANN):
     # training stats
     model_file = model_file.replace("_C1_", f"{model.epochs}")
     model_file = model_file.replace("_C2_", f"{model.training_set_size} samples")
+    model_file = model_file.replace("_C3_", f"{np.round(model.training_loss, 5)}")
+
     # loss over epochs
     model_file = model_file.replace("_TRAINING_CURVE_", f"{working_directory}results/plots/training_loss.png")
 
