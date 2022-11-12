@@ -20,7 +20,9 @@ class Hyper_Parameter_Optimization:
             nn.ReLU(),
             nn.Linear(params["n_units_1"], params["n_units_2"]),
             nn.ReLU(),
-            nn.Linear(params["n_units_2"], out_features),
+            nn.Linear(params["n_units_2"], params["n_units_3"]),
+            nn.ReLU(),
+            nn.Linear(params["n_units_3"], out_features),
         )
         return model
 
@@ -54,6 +56,7 @@ class Hyper_Parameter_Optimization:
         params = {
             "n_units_1": trial.suggest_int("n_units_1", 3, 10),
             "n_units_2": trial.suggest_int("n_units_2", 3, 10),
+            "n_units_3": trial.suggest_int("n_units_3", 3, 10),
             "learning_rate": trial.suggest_float("learning_rate", 0.0001, 0.01)
         }
 

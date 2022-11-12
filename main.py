@@ -25,6 +25,7 @@ hpo.data.show_results()
 model = ANN(in_features=training_set.feature_number, 
             h1=hpo.data.param_set["n_units_1"], 
             h2=hpo.data.param_set["n_units_2"], 
+            h3=hpo.data.param_set["n_units_3"], 
             out_features=training_set.class_number)
 
 # give model description
