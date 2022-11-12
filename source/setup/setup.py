@@ -20,6 +20,9 @@ def setup_run(config_file):
     # get input files
     config = read_configuration(config_file)
 
+    if "name" not in config.keys():
+        config["model_name"] = "Pythagoras"
+
     # set-up file structure
     print("\n")
     create_directories(config["work_directory"])

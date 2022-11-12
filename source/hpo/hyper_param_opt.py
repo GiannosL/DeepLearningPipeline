@@ -7,7 +7,8 @@ from source.model.model_preparation import convert_to_tensor
 
 
 class Hyper_Parameter_Optimization:
-    def __init__(self, data, n_trials):
+    def __init__(self, data, n_trials, model_name):
+        self.name = model_name
         self.X = convert_to_tensor(data.feature_matrix)
         self.y = convert_to_tensor(data.target, target=True)
 
@@ -77,6 +78,6 @@ class Hyper_Parameter_Optimization:
 
         #
         results = HPO_Study(study.best_trial.number, study.best_params, 
-                            study.best_value, study.trials, "Pythagoras")
+                            study.best_value, study.trials, self.name)
 
         return results

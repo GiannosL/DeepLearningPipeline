@@ -18,7 +18,7 @@ training_set.plot_principal_components(save_path=config["work_directory"])
 test_set.plot_principal_components(save_path=config["work_directory"], train_test_flag="test")
 
 # perform hyper parameter optimization
-hpo = Hyper_Parameter_Optimization(training_set, n_trials=config["hpo_trials"])
+hpo = Hyper_Parameter_Optimization(training_set, n_trials=config["hpo_trials"], model_name=config["name"])
 hpo.data.show_results()
 
 # start up main model
@@ -28,7 +28,7 @@ model = ANN(in_features=training_set.feature_number,
             h3=hpo.data.param_set["n_units_3"], 
             out_features=training_set.class_number, 
             learning_rate=hpo.data.param_set["learning_rate"],
-            epochs=200)
+            epochs=200, name=config["name"])
 
 # Normalize data
 training_set, test_set = standardize_data(training_set, test_set)
