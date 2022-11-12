@@ -21,7 +21,7 @@ def setup_run(config_file):
     config = read_configuration(config_file)
 
     if "name" not in config.keys():
-        config["model_name"] = "Pythagoras"
+        config["name"] = "Pythagoras"
 
     # set-up file structure
     print("\n")
