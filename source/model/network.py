@@ -11,17 +11,21 @@ class ANN(nn.Module):
                  in_features=4, 
                  out_features=3,
                  learning_rate = 0.01,
-                 name="Pythagoras"):
+                 name="Pythagoras",
+                 training_flag=False):
 
         super().__init__()
         # Model name
         self.name = name
 
-        #
+        # parameters that will be used for training the model
         self.learning_rate = learning_rate
         self.epochs = epochs
         self.training_set_size = None
         self.training_loss = None
+
+        # for dropout
+        self.training_flag = training_flag
 
         #
         self.in_features = in_features
@@ -29,6 +33,7 @@ class ANN(nn.Module):
         self.h2 = h2
         self.h3 = h3
         self.out_features = out_features
+        self.dropout_rate = 0.3
 
         # layers: input=4 -> h1 -> h2 N --> output=3
         # input - h1
@@ -52,7 +57,9 @@ class ANN(nn.Module):
     
     def forward(self, x):
         x = F.relu(self.fc1(x))
+        x = F.dropout(x, self.dropout_rate, training=self.training_flag)
         x = F.relu(self.fc2(x))
+        x = F.dropout(x, self.dropout_rate, training=self.training_flag)
         x = F.relu(self.fc3(x))
         x = self.out(x)
 

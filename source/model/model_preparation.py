@@ -20,6 +20,9 @@ def train_model(X, y, model, epochs=50, itta=0.01,
     # document the training-set size
     model.training_set_size = X.shape[0]
 
+    # set training flag
+    model.training_flag = True
+
     X = convert_to_tensor(X)
     y = convert_to_tensor(y, target=True)
     
@@ -50,6 +53,9 @@ def train_model(X, y, model, epochs=50, itta=0.01,
 
 def make_prediction(X, model, y: pd.DataFrame() = pd.DataFrame()):
     X = convert_to_tensor(X)
+
+    # set training flag
+    model.training_flag = False
 
     with torch.no_grad():
         y_pred = model.forward(X)
