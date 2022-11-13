@@ -28,7 +28,8 @@ model = ANN(in_features=training_set.feature_number,
             h3=hpo.data.param_set["n_units_3"], 
             out_features=training_set.class_number, 
             learning_rate=hpo.data.param_set["learning_rate"],
-            epochs=200, name=config["name"])
+            epochs=200, name=config["name"], 
+            dropout_rate=hpo.data.param_set["dropout_rate"])
 
 # Normalize data
 training_set, test_set = standardize_data(training_set, test_set)

@@ -10,9 +10,10 @@ class ANN(nn.Module):
                  epochs=50,
                  in_features=4, 
                  out_features=3,
-                 learning_rate = 0.01,
+                 learning_rate=0.01,
                  name="Pythagoras",
-                 training_flag=False):
+                 training_flag=False,
+                 dropout_rate=0):
 
         super().__init__()
         # Model name
@@ -33,7 +34,7 @@ class ANN(nn.Module):
         self.h2 = h2
         self.h3 = h3
         self.out_features = out_features
-        self.dropout_rate = 0.3
+        self.dropout_rate = dropout_rate
 
         # layers: input=4 -> h1 -> h2 N --> output=3
         # input - h1

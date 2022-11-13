@@ -17,10 +17,13 @@ class Hyper_Parameter_Optimization:
     def build_mock_model(self, in_features, out_features, params):
         model = nn.Sequential(
             nn.Linear(in_features, params["n_units_1"]),
+            nn.Dropout(p= params["dropout_rate"]),
             nn.ReLU(),
             nn.Linear(params["n_units_1"], params["n_units_2"]),
+            nn.Dropout(p= params["dropout_rate"]),
             nn.ReLU(),
             nn.Linear(params["n_units_2"], params["n_units_3"]),
+            nn.Dropout(p= params["dropout_rate"]),
             nn.ReLU(),
             nn.Linear(params["n_units_3"], out_features),
         )
@@ -57,6 +60,7 @@ class Hyper_Parameter_Optimization:
             "n_units_1": trial.suggest_int("n_units_1", 3, 10),
             "n_units_2": trial.suggest_int("n_units_2", 3, 10),
             "n_units_3": trial.suggest_int("n_units_3", 3, 10),
+            "dropout_rate": trial.suggest_float("dropout_rate", 0.0001, 0.5),
             "learning_rate": trial.suggest_float("learning_rate", 0.0001, 0.01)
         }
 
