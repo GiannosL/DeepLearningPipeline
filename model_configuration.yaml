@@ -1,3 +1,4 @@
-work_directory: "../results/"
+work_directory: "iris_results/"
 
+hpo_trials: 1000
 features: "petal_length,petal_width,sepal_length,sepal_width"
