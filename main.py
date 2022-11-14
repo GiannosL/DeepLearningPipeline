@@ -1,12 +1,16 @@
+#!/usr/bin/env python3
 from source.model.network import ANN
 from source.setup.setup import setup_run
+from source.setup.arguments import collect_arguments
 from source.output.report_generation import make_report
 from source.hpo.hyper_param_opt import Hyper_Parameter_Optimization
 from source.data.data_preparation import generate_datasets, standardize_data
 
+# collect input arguments
+args = collect_arguments()
 
 # read configuration
-config = setup_run("model_configuration.yaml") 
+config = setup_run(args.configfile) 
 
 # build datasets
 training_set, test_set = generate_datasets(feature_list=config["features"].split(","))
