@@ -16,7 +16,11 @@ class ANN(nn.Module):
         #
         self.hyper_parameters = hyper_params
         self.in_features = input_layer_nodes
+        self.h1_nodes = self.hyper_parameters["n_units_1"] if self.hyper_parameters["n_layers"]>=1 else "-"
+        self.h2_nodes = self.hyper_parameters["n_units_2"] if self.hyper_parameters["n_layers"]>=2 else "-"
+        self.h3_nodes = self.hyper_parameters["n_units_3"] if self.hyper_parameters["n_layers"]==3 else "-"
         self.out_features = output_layer_nodes
+
         self.dropout_rate = self.hyper_parameters["dropout_rate"]
         self.layers = [
             self.in_features,
@@ -34,8 +38,8 @@ class ANN(nn.Module):
         print("Total number of layers = 5")
         print(f"Input layer:\t{self.in_features} nodes")
         print(f"Hidden layer 1:\t{self.h1_nodes} nodes")
-        print(f"Hidden layer 2:\t{'-'} nodes")
-        print(f"Hidden layer 3:\t{'-'} nodes")
+        print(f"Hidden layer 2:\t{self.h2_nodes} nodes")
+        print(f"Hidden layer 3:\t{self.h3_nodes} nodes")
         print(f"Output layer:\t{self.out_features} nodes")
 
         print("All layers are using the Rectified Linear Unit activation function.")
@@ -82,6 +86,7 @@ class ANN(nn.Module):
 
         for i in range(self.hyper_parameters["n_layers"]):
             layers.append(nn.Linear(self.layers[i], self.layers[i+1]))
+            #layers.append(nn.Dropout(p=self.dropout_rate))
             layers.append(nn.ReLU())
         
         layers.append(nn.Linear(self.layers[i+1], self.out_features))
