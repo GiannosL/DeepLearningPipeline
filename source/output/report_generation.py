@@ -51,9 +51,9 @@ def edit_model_file(working_directory, model: ANN):
     # model description
     model_file = model_file.replace("_MODEL_NAME_", model.name)
     model_file = model_file.replace("_B1_", f"{model.in_features} nodes")
-    model_file = model_file.replace("_B2_", f"{model.h1} nodes")
-    model_file = model_file.replace("_B3_", f"{model.h2} nodes")
-    model_file = model_file.replace("_B4_", f"{model.h3} nodes")
+    model_file = model_file.replace("_B2_", f"{'-'} nodes")
+    model_file = model_file.replace("_B3_", f"{'-'} nodes")
+    model_file = model_file.replace("_B4_", f"{'-'} nodes")
     model_file = model_file.replace("_B5_", f"{model.out_features} nodes")
     model_file = model_file.replace("_B6_", f"{np.round(model.dropout_rate, 5)}")
     model_file = model_file.replace("_B7_", f"{np.round(model.learning_rate, 5)}")

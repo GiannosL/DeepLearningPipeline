@@ -3,7 +3,7 @@ import optuna
 import torch.nn as nn
 
 from source.hpo.hpo_results import HPO_Study
-from source.model.model_preparation import convert_to_tensor
+from source.model.network import convert_to_tensor
 
 
 class Hyper_Parameter_Optimization:
