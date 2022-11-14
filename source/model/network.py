@@ -53,7 +53,7 @@ class ANN(nn.Module):
         self.optimizer = optimizer
         self.epochs = epochs
 
-    def setup_model(self, input_layer_nodes, hidden_layer_nodes, output_layer_nodes, dropout, learning_rate):        
+    def setup_model(self, input_layer_nodes, hidden_layer_nodes, output_layer_nodes, dropout, learning_rate):  
         #
         self.in_features = input_layer_nodes
         self.h1_nodes = hidden_layer_nodes
