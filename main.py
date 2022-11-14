@@ -12,7 +12,7 @@ config = setup_run("model_configuration.yaml")
 training_set, test_set = generate_datasets(feature_list=config["features"].split(","))
 
 # plot principal components of the dataset
-print("\n[ ] Calculationg PCs of input dataset.\n")
+print("[ ] Calculationg PCs of input dataset.\n")
 training_set.plot_principal_components(save_path=config["work_directory"])
 test_set.plot_principal_components(save_path=config["work_directory"], train_test_flag="test")
 
