@@ -14,20 +14,19 @@ class Hyper_Parameter_Optimization:
 
         self.data = self.hyper_parameter_optimization(number_of_trials=n_trials)
 
-    def build_mock_model(self, in_features, out_features, params):
-        model = nn.Sequential(
-            nn.Linear(in_features, params["n_units_1"]),
-            nn.Dropout(p= params["dropout_rate"]),
-            nn.ReLU(),
-            nn.Linear(params["n_units_1"], params["n_units_2"]),
-            nn.Dropout(p= params["dropout_rate"]),
-            nn.ReLU(),
-            nn.Linear(params["n_units_2"], params["n_units_3"]),
-            nn.Dropout(p= params["dropout_rate"]),
-            nn.ReLU(),
-            nn.Linear(params["n_units_3"], out_features),
-        )
-        return model
+    def create_model(self, in_features, out_features, params):
+        
+        layers = []
+        for i in range(params["n_layers"]):
+            i += 1
+            n_units = params[f"n_units_{i}"]
+            layers.append(nn.Linear(in_features, n_units))
+            layers.append(nn.Dropout(p= params["dropout_rate"]))
+            layers.append(nn.ReLU())
+            in_features = n_units
+        layers.append(nn.Linear(in_features, out_features))
+
+        return nn.Sequential(*layers)
 
     def train_model(self, model, epochs=50, itta=0.01, 
                     criterion=nn.CrossEntropyLoss(), 
@@ -57,6 +56,7 @@ class Hyper_Parameter_Optimization:
     def objective(self, trial):
         # set parameters to optimize
         params = {
+            "n_layers": trial.suggest_int("n_layers", 1, 3),
             "n_units_1": trial.suggest_int("n_units_1", 3, 10),
             "n_units_2": trial.suggest_int("n_units_2", 3, 10),
             "n_units_3": trial.suggest_int("n_units_3", 3, 10),
@@ -65,7 +65,7 @@ class Hyper_Parameter_Optimization:
         }
 
         # model builder -- mock
-        model = self.build_mock_model(4, 3, params)
+        model = self.create_model(4, 3, params)
 
         #
         accuracy = self.train_model(model, itta=params["learning_rate"])

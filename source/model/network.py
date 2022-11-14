@@ -7,17 +7,18 @@ from source.output.predictions import Predictions
 
 class ANN(nn.Module):
 
-    def __init__(self, input_layer_nodes, hidden_layer_nodes, output_layer_nodes, dropout, name="Pythagoras"):
+    def __init__(self, input_layer_nodes, output_layer_nodes, hyper_params, name="Pythagoras"):
 
         super().__init__()
         # Model name
         self.name = name
         
         #
+        self.hyper_parameters = hyper_params
         self.in_features = input_layer_nodes
-        self.h1_nodes = hidden_layer_nodes
+        self.h1_nodes = self.hyper_parameters["n_units_1"]
         self.out_features = output_layer_nodes
-        self.dropout_rate = dropout
+        self.dropout_rate = self.hyper_parameters["dropout_rate"]
 
         #
         self.model = self.setup_model()

@@ -21,8 +21,8 @@ hpo = Hyper_Parameter_Optimization(training_set, n_trials=config["hpo_trials"], 
 hpo.data.show_results()
 
 # start up main model
-my_model = ANN(input_layer_nodes=training_set.feature_number, hidden_layer_nodes=hpo.data.param_set["n_units_1"],
-               output_layer_nodes=training_set.class_number, dropout=hpo.data.param_set["dropout_rate"], name=config["name"])
+my_model = ANN(input_layer_nodes=training_set.feature_number, hyper_params=hpo.data.param_set,
+               output_layer_nodes=training_set.class_number, name=config["name"])
 my_model.setup_training(learning_rate=hpo.data.param_set["learning_rate"])
 
 # Normalize data
