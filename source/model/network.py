@@ -16,9 +16,14 @@ class ANN(nn.Module):
         #
         self.hyper_parameters = hyper_params
         self.in_features = input_layer_nodes
-        self.h1_nodes = self.hyper_parameters["n_units_1"]
         self.out_features = output_layer_nodes
         self.dropout_rate = self.hyper_parameters["dropout_rate"]
+        self.layers = [
+            self.in_features,
+            self.hyper_parameters["n_units_1"], 
+            self.hyper_parameters["n_units_2"], 
+            self.hyper_parameters["n_units_3"]
+            ]
 
         #
         self.model = self.setup_model()
@@ -73,11 +78,14 @@ class ANN(nn.Module):
 
     def setup_model(self):          
         #
-        model = nn.Sequential(
-            nn.Linear(self.in_features, self.h1_nodes),
-            nn.ReLU(),
-            nn.Linear(self.h1_nodes, self.out_features)
-        )
+        layers = []
+
+        for i in range(self.hyper_parameters["n_layers"]):
+            layers.append(nn.Linear(self.layers[i], self.layers[i+1]))
+            layers.append(nn.ReLU())
+        
+        layers.append(nn.Linear(self.layers[i+1], self.out_features))
+        model = nn.Sequential(*layers)
 
         return model
     
