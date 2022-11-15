@@ -47,18 +47,19 @@ class ANN(nn.Module):
     
     def train_model(self, X, y_true, work_directory):
         
+        # pandas dataframe -> pytorch tensors
         X = convert_to_tensor(X)
         y_true = convert_to_tensor(y_true, target=True)
 
-        #
+        # size of the training set
         self.training_set_size = X.shape[0]
 
         losses = []
         for epoch in range(self.epochs):
-            #
+            # make prediction
             y_pred = self.model(X)
 
-            #
+            # evaluate model's performance using the loss criterion
             loss = self.loss_function(y_pred, y_true)
             losses.append(loss.item())
 
@@ -74,16 +75,16 @@ class ANN(nn.Module):
     def setup_training(self, loss_func=nn.CrossEntropyLoss(), 
                        optimizer=torch.optim.Adam, epochs=1000,
                        learning_rate=0.01):
-        
+        """provide hyper-parameters for training the model"""
         self.learning_rate = learning_rate
         self.loss_function = loss_func
         self.optimizer = optimizer(self.model.parameters(), lr=self.learning_rate)
         self.epochs = epochs
 
     def setup_model(self):          
-        #
-        layers = []
+        """Creates model template""" 
 
+        layers = []
         for i in range(self.hyper_parameters["n_layers"]):
             layers.append(nn.Linear(self.layers[i], self.layers[i+1]))
             #layers.append(nn.Dropout(p=self.dropout_rate))
@@ -95,6 +96,7 @@ class ANN(nn.Module):
         return model
     
     def predict(self, X, y):
+        """Makes prediction"""
         X = convert_to_tensor(X)
         y_pred = self.model(X)
 
@@ -103,11 +105,11 @@ class ANN(nn.Module):
         return Predictions(data=X, y_true=y, y_pred=y_pred)
     
     def plot_loss_history(self, work_dir):
-        #
+        # figure dimensions
         plt.figure(figsize=(10, 7))
-        #
+        # generate plot
         plt.plot(range(1, self.epochs+1), self.loss_history)
-        # 
+        # set labels for axis and title
         plt.title("Loss trajectory over epochs", fontsize=16, weight="bold")
         plt.ylabel("Loss", fontsize=12)
         plt.xlabel("Epochs", fontsize=12)
@@ -122,6 +124,11 @@ class ANN(nn.Module):
 
 
 def convert_to_tensor(df: pd.DataFrame, target=False):
+    """
+    Function takes as input a pandas dataframe and
+    converts it to a pytorch tensor. If the input is 
+    the target values then use proper format.
+    """
     if target:
         return torch.LongTensor(df["condition"].values)
     else:
