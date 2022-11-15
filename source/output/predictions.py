@@ -6,6 +6,8 @@ from sklearn.decomposition import PCA
 
 class Predictions:
     def __init__(self, data, y_true, y_pred):
+
+        # check that the true target values have been provided
         if not y_true.empty:
             self.y_true = y_true
             self.calculate_stats(y_true, y_pred)
@@ -13,10 +15,12 @@ class Predictions:
             self.y_true = pd.DataFrame()
             self.accuracy = 0
 
+        # save the prediction results
         self.data = data 
         self.y_pred = y_pred
     
     def calculate_stats(self, y_true, y_pred):
+        """Calculate useful statistics for model evaluation"""
         results = y_true
         results["prediction"] = y_pred
 
