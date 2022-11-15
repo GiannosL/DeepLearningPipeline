@@ -13,7 +13,7 @@ class ANN(nn.Module):
         # Model name
         self.name = name
         
-        #
+        # Set's up model variables. Most are needed just for report.
         self.hyper_parameters = hyper_params
         self.in_features = input_layer_nodes
         self.h1_nodes = self.hyper_parameters["n_units_1"] if self.hyper_parameters["n_layers"]>=1 else "-"
