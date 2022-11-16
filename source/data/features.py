@@ -6,10 +6,14 @@ from sklearn.preprocessing import StandardScaler
 
 
 class Feature:
-    def __init__(self, name, data_dictionary, dataset_flag="train", target_feature=False):
+    def __init__(self, name, data_dictionary, continuous=True,
+                 dataset_flag="train", target_feature=False):
         #
         self.name = name
         self.target_feature = target_feature
+        self.continuous = continuous
+
+        #
         if dataset_flag=="train":
             self.filename = data_dictionary["training"][name]
         else:
@@ -45,14 +49,20 @@ class Input_data:
             assert(new_feature.sample_number != self.sample_number)
         
         if new_feature.target_feature:
-            self.target = new_feature.data
-            self.target_flag = True
-            self.get_class_number()
-        
+            # Check if features is continuous or categorical.
+            if new_feature.continuous:
+                self.target = new_feature.data
+                self.target_flag = True
+                self.get_class_number()
+            else:
+                self.add_categorical_column(new_feature)
         else:
             self.feature_matrix[new_feature.name] = new_feature.data
             self.feature_number += 1
             self.column_names.append(new_feature.name)
+    
+    def add_categorical_column(self, feature):
+        pass
     
     def get_class_number(self):
         self.class_number = self.target["condition"].nunique()
