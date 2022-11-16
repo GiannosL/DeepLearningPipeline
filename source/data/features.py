@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import torch.nn as nn
 import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
@@ -62,7 +63,12 @@ class Input_data:
             self.column_names.append(new_feature.name)
     
     def add_categorical_column(self, feature):
-        pass
+        number_of_classes = 4
+        embedding_size = 10
+
+        # perform embedding
+        embedding = nn.Embedding(number_of_classes, embedding_size)
+        return 0
     
     def get_class_number(self):
         self.class_number = self.target["condition"].nunique()
