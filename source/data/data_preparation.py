@@ -1,3 +1,4 @@
+import yaml
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -6,21 +7,29 @@ from sklearn.preprocessing import StandardScaler
 from source.data.features import Feature, Input_data
 
 
-def generate_datasets(feature_list):
+def generate_datasets(feature_list, database_yaml):
     training_set = Input_data()
     test_set = Input_data()
+    database = get_database_paths(database_yaml=database_yaml)
 
     for feat in feature_list:
-        training_set.add_feature(Feature(feat, dataset_flag="train"))
-        test_set.add_feature(Feature(feat, dataset_flag="test"))
+        training_set.add_feature(Feature(feat, data_dictionary=database, dataset_flag="train"))
+        test_set.add_feature(Feature(feat, data_dictionary=database, dataset_flag="test"))
 
     # add target 
-    target = Feature("condition", dataset_flag="train", target_feature=True)
+    target = Feature("condition", data_dictionary=database, dataset_flag="train", target_feature=True)
     training_set.add_feature(target)
-    target = Feature("condition", dataset_flag="test", target_feature=True)
+    target = Feature("condition", data_dictionary=database, dataset_flag="test", target_feature=True)
     test_set.add_feature(target)
 
     return training_set, test_set
+
+
+def get_database_paths(database_yaml):
+    # dictionary with paths to features
+    with open(database_yaml, "r") as f:
+        data_dictionary = yaml.full_load(f)
+    return data_dictionary
 
 
 def standardize_data(train: Input_data, test: Input_data):
@@ -33,6 +42,7 @@ def standardize_data(train: Input_data, test: Input_data):
 
 
     return train, test
+
 
 def barplot_pc_variance(work_dir, trn_dict, tst_dict):
     trn_list = list(trn_dict.values())
