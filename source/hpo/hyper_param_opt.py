@@ -9,6 +9,10 @@ from source.model.network import convert_to_tensor
 class Hyper_Parameter_Optimization:
     def __init__(self, data, n_trials, model_name):
         self.name = model_name
+
+        self.number_of_features = data.feature_number
+        self.number_of_classes = data.class_number
+
         self.X = convert_to_tensor(data.feature_matrix)
         self.y = convert_to_tensor(data.target, target=True)
 
@@ -65,7 +69,7 @@ class Hyper_Parameter_Optimization:
         }
 
         # model builder -- mock
-        model = self.create_model(4, 3, params)
+        model = self.create_model(self.number_of_features, self.number_of_classes, params)
 
         #
         accuracy = self.train_model(model, itta=params["learning_rate"])
