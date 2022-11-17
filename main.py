@@ -13,7 +13,9 @@ args = collect_arguments()
 config = setup_run(args.configfile) 
 
 # build datasets
-training_set, test_set = generate_datasets(feature_list=config["features"].split(","), database_yaml=config["database_yaml"])
+training_set, test_set = generate_datasets(continuous_feature_list=config["features_continuous"].split(","), 
+                                           categorical_feature_list=config["features_categorical"].split(","),
+                                           database_yaml=config["database_yaml"])
 
 # plot principal components of the dataset
 print("[ ] Calculationg PCs of input dataset.\n")

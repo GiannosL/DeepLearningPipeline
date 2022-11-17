@@ -7,14 +7,17 @@ from sklearn.preprocessing import StandardScaler
 from source.data.features import Feature, Input_data
 
 
-def generate_datasets(feature_list, database_yaml):
+def generate_datasets(continuous_feature_list, categorical_feature_list, database_yaml):
     training_set = Input_data()
     test_set = Input_data()
     database = get_database_paths(database_yaml=database_yaml)
 
-    for feat in feature_list:
-        training_set.add_feature(Feature(feat, data_dictionary=database, dataset_flag="train"))
-        test_set.add_feature(Feature(feat, data_dictionary=database, dataset_flag="test"))
+    for feat in continuous_feature_list:
+        training_set.add_feature(Feature(feat, data_dictionary=database, dataset_flag="train", continuous=True))
+        test_set.add_feature(Feature(feat, data_dictionary=database, dataset_flag="test", continuous=True))
+    for feat in categorical_feature_list:
+        training_set.add_feature(Feature(feat, data_dictionary=database, dataset_flag="train", continuous=False))
+        test_set.add_feature(Feature(feat, data_dictionary=database, dataset_flag="test", continuous=False))
 
     # add target 
     target = Feature("condition", data_dictionary=database, dataset_flag="train", target_feature=True)

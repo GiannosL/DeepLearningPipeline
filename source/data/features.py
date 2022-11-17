@@ -46,7 +46,7 @@ class Feature:
         emb = torch.nn.Embedding(number_of_categories, number_of_embeddings)
         selfembeds = torch.nn.ModuleList([emb])
 
-        self.data = selfembeds[0](data).detach().numpy().flatten()
+        self.data = selfembeds[0](feature_).detach().numpy().flatten()
 
 
 class Input_data:
