@@ -1,6 +1,6 @@
+import torch
 import numpy as np
 import pandas as pd
-import torch.nn as nn
 import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
@@ -21,6 +21,10 @@ class Feature:
             self.filename = data_dictionary["testing"][name]
 
         self.data = self.read_csv()
+
+        # if the feature is categorical perform embedding.
+        if self.continuous == False:
+            self.perform_embedding
     
     def read_csv(self):
         data = pd.read_csv(self.filename, header=None)
@@ -28,6 +32,21 @@ class Feature:
         
         self.sample_number = data.shape[0]
         return data
+    
+    def perform_embedding(self):
+        # make values into categories.
+        data = self.data[self.name].astype("category")
+
+        # convert into tensor (beware if strings are given as values there will be a problem)
+        feature_ = torch.tensor(data.iloc[:, 0], dtype=torch.int64)
+
+        number_of_categories = len(data.cat.categories)
+        number_of_embeddings = min(50, (number_of_categories+1)//2)
+
+        emb = torch.nn.Embedding(number_of_categories, number_of_embeddings)
+        selfembeds = torch.nn.ModuleList([emb])
+
+        self.data = selfembeds[0](data).detach().numpy().flatten()
 
 
 class Input_data:
@@ -50,25 +69,13 @@ class Input_data:
             assert(new_feature.sample_number != self.sample_number)
         
         if new_feature.target_feature:
-            # Check if features is continuous or categorical.
-            if new_feature.continuous:
-                self.target = new_feature.data
-                self.target_flag = True
-                self.get_class_number()
-            else:
-                self.add_categorical_column(new_feature)
+            self.target = new_feature.data
+            self.target_flag = True
+            self.get_class_number()
         else:
             self.feature_matrix[new_feature.name] = new_feature.data
             self.feature_number += 1
             self.column_names.append(new_feature.name)
-    
-    def add_categorical_column(self, feature):
-        number_of_classes = 4
-        embedding_size = 10
-
-        # perform embedding
-        embedding = nn.Embedding(number_of_classes, embedding_size)
-        return 0
     
     def get_class_number(self):
         self.class_number = self.target["condition"].nunique()
