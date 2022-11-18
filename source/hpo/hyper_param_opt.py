@@ -1,17 +1,20 @@
 import torch
 import optuna
 import torch.nn as nn
+from sklearn.model_selection import KFold
 
 from source.hpo.hpo_results import HPO_Study
 from source.model.network import convert_to_tensor
 
 
 class Hyper_Parameter_Optimization:
-    def __init__(self, data, n_trials, model_name):
+    def __init__(self, data, n_trials, model_name, cv_split=5):
         self.name = model_name
 
         self.number_of_features = data.feature_number
         self.number_of_classes = data.class_number
+
+        self.cross_validation_split = cv_split
 
         self.X = convert_to_tensor(data.feature_matrix)
         self.y = convert_to_tensor(data.target, target=True)
@@ -39,23 +42,29 @@ class Hyper_Parameter_Optimization:
         loss_history = []
         optimizer = optimizer(model.parameters(), lr=itta)
 
-        for i in range(epochs):
-            i += 1
-            y_pred = model.forward(self.X)
+        # Start 5-fold cross validation
+        kf = KFold(n_splits=self.cross_validation_split)
+        for train_index, test_index in kf.split(self.X):
+            X_train, X_test = self.X[train_index], self.X[test_index]
+            y_train, y_test = self.y[train_index], self.y[test_index]
 
-            # 
-            loss = criterion(y_pred, self.y)
-            loss_history.append(loss.item())
+            for i in range(epochs):
+                i += 1
+                y_pred = model.forward(X_train)
 
-            # backpropagation
-            optimizer.zero_grad()
-            loss.backward()
-            optimizer.step()
+                # 
+                loss = criterion(y_pred, y_train)
+                loss_history.append(loss.item())
+
+                # backpropagation
+                optimizer.zero_grad()
+                loss.backward()
+                optimizer.step()
+            
+            with torch.no_grad():
+                y_pred = model.forward(X_test)
         
-        with torch.no_grad():
-            y_pred = model.forward(self.X)
-        
-        return criterion(y_pred, self.y)
+        return criterion(y_pred, y_test)
 
     def objective(self, trial):
         # set parameters to optimize
