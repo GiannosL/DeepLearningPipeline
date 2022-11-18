@@ -29,7 +29,7 @@ hpo.data.show_results()
 # start up main model
 my_model = ANN(input_layer_nodes=training_set.feature_number, hyper_params=hpo.data.param_set,
                output_layer_nodes=training_set.class_number, name=config["model_name"])
-my_model.setup_training(learning_rate=hpo.data.param_set["learning_rate"])
+my_model.setup_training(learning_rate=hpo.data.param_set["learning_rate"], epochs=hpo.data.param_set["n_epochs"])
 
 # Normalize data
 training_set, test_set = standardize_data(training_set, test_set)

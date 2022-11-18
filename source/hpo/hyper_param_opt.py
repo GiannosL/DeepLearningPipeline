@@ -60,6 +60,7 @@ class Hyper_Parameter_Optimization:
     def objective(self, trial):
         # set parameters to optimize
         params = {
+            "n_epochs": trial.suggest_int("n_epochs", 100, 2000, step=20),
             "n_layers": trial.suggest_int("n_layers", 1, 3),
             "n_units_1": trial.suggest_int("n_units_1", 3, 10),
             "n_units_2": trial.suggest_int("n_units_2", 3, 10),
@@ -72,7 +73,7 @@ class Hyper_Parameter_Optimization:
         model = self.create_model(self.number_of_features, self.number_of_classes, params)
 
         #
-        accuracy = self.train_model(model, itta=params["learning_rate"])
+        accuracy = self.train_model(model, epochs=params["n_epochs"], itta=params["learning_rate"])
         
         return accuracy
 
