@@ -44,7 +44,7 @@ class ANN(nn.Module):
         print(f"Output layer:\t{self.out_features} nodes")
 
         print("All layers are using the Rectified Linear Unit activation function.")
-        print(f"{terminal_colors.okblue}-------------------------------------------------------------------\n{terminal_colors.bold}")
+        print(f"{terminal_colors.okblue}-------------------------------------------------------------------\n{terminal_colors.endc}")
     
     def train_model(self, X, y_true, work_directory):
         
