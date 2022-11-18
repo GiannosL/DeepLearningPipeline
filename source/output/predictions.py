@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
+from source.setup.terminal_colours import terminal_colors
 
 
 class Predictions:
@@ -30,10 +31,10 @@ class Predictions:
         
         self.accuracy = (correct.shape[0]/y_true.shape[0])*100
         
-        print("\n-------------------------------------------------------------------")
+        print(f"{terminal_colors.bold}\n-------------------------------------------------------------------{terminal_colors.endc}")
         print(f"Correct predictions / all: {correct.shape[0]} / {y_pred.shape[0]}")
         print(f"Test prediction accuracy: {self.accuracy}%")
-        print("-------------------------------------------------------------------\n")
+        print(f"{terminal_colors.bold}-------------------------------------------------------------------\n{terminal_colors.endc}")
 
     def pca(self):
         n_feat = self.data.shape[1]

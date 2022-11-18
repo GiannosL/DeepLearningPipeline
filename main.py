@@ -3,6 +3,7 @@ from source.model.network import ANN
 from source.setup.setup import setup_run
 from source.setup.arguments import collect_arguments
 from source.output.report_generation import make_report
+from source.setup.terminal_colours import terminal_colors
 from source.hpo.hyper_param_opt import Hyper_Parameter_Optimization
 from source.data.data_preparation import generate_datasets, standardize_data
 
@@ -18,7 +19,7 @@ training_set, test_set = generate_datasets(continuous_feature_list=config["featu
                                            database_yaml=config["database_yaml"])
 
 # plot principal components of the dataset
-print("[ ] Calculationg PCs of input dataset.\n")
+print(terminal_colors.okcyan + "[ ] Calculationg PCs of input dataset.\n" + terminal_colors.endc)
 training_set.plot_principal_components(save_path=config["work_directory"])
 test_set.plot_principal_components(save_path=config["work_directory"], train_test_flag="test")
 

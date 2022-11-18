@@ -3,6 +3,7 @@ import pandas as pd
 import torch.nn as nn
 import matplotlib.pyplot as plt
 from source.output.predictions import Predictions
+from source.setup.terminal_colours import terminal_colors
 
 
 class ANN(nn.Module):
@@ -33,7 +34,7 @@ class ANN(nn.Module):
         self.model = self.setup_model()
     
     def model_description(self):
-        print("\n-------------------------------------------------------------------")
+        print(f"{terminal_colors.okblue}\n-------------------------------------------------------------------{terminal_colors.endc}")
         print("Multi-layer perceptron model.")
         print("Total number of layers = 5")
         print(f"Input layer:\t{self.in_features} nodes")
@@ -43,7 +44,7 @@ class ANN(nn.Module):
         print(f"Output layer:\t{self.out_features} nodes")
 
         print("All layers are using the Rectified Linear Unit activation function.")
-        print("-------------------------------------------------------------------\n")
+        print(f"{terminal_colors.okblue}-------------------------------------------------------------------\n{terminal_colors.bold}")
     
     def train_model(self, X, y_true, work_directory):
         
