@@ -73,7 +73,7 @@ class ANN(nn.Module):
         self.loss_history = losses
         self.plot_loss_history(work_directory)
     
-    def setup_training(self, loss_func=nn.CrossEntropyLoss(), 
+    def setup_training(self, cv_split, loss_func=nn.CrossEntropyLoss(), 
                        optimizer=torch.optim.Adam, epochs=1000,
                        learning_rate=0.01):
         """provide hyper-parameters for training the model"""
@@ -81,6 +81,8 @@ class ANN(nn.Module):
         self.loss_function = loss_func
         self.optimizer = optimizer(self.model.parameters(), lr=self.learning_rate)
         self.epochs = epochs
+        # keep track of what cross validation was used
+        self.cv_split = cv_split
 
     def setup_model(self):          
         """Creates model template""" 

@@ -59,6 +59,7 @@ def edit_model_file(working_directory, model: ANN):
     model_file = model_file.replace("_B6_", f"{np.round(model.dropout_rate, 5)}")
     model_file = model_file.replace("_B7_", f"{np.round(model.learning_rate, 5)}")
     # training stats
+    model_file = model_file.replace("_C0_", f"{model.cv_split}")
     model_file = model_file.replace("_C1_", f"{model.epochs}")
     model_file = model_file.replace("_C2_", f"{model.training_set_size} samples")
     model_file = model_file.replace("_C3_", f"{np.round(model.training_loss, 5)}")
