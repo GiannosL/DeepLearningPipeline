@@ -26,6 +26,7 @@ test_set.plot_principal_components(save_path=config["work_directory"], train_tes
 # perform hyper parameter optimization
 hpo = Hyper_Parameter_Optimization(training_set, n_trials=config["hpo_trials"], model_name=config["model_name"])
 hpo.data.show_results()
+hpo.data.plot_trials(working_directory=config["work_directory"])
 
 # start up main model
 my_model = ANN(input_layer_nodes=training_set.feature_number, hyper_params=hpo.data.param_set,
