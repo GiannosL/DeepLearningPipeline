@@ -19,6 +19,11 @@ class Hyper_Parameter_Optimization:
         self.X = convert_to_tensor(data.feature_matrix)
         self.y = convert_to_tensor(data.target, target=True)
 
+        # Save the loss-over-epochs for all trials.
+        self.hpo_trial_num = 0
+        self.loss_history = {}
+        self.max_epochs = 2000
+
         self.data = self.hyper_parameter_optimization(number_of_trials=n_trials)
 
     def create_model(self, in_features, out_features, params):
@@ -72,7 +77,7 @@ class Hyper_Parameter_Optimization:
     def objective(self, trial):
         # set parameters to optimize
         params = {
-            "n_epochs": trial.suggest_int("n_epochs", 100, 2000, step=20),
+            "n_epochs": trial.suggest_int("n_epochs", 100, self.max_epochs, step=20),
             "n_layers": trial.suggest_int("n_layers", 1, 3),
             "n_units_1": trial.suggest_int("n_units_1", 3, 10),
             "n_units_2": trial.suggest_int("n_units_2", 3, 10),
@@ -91,8 +96,6 @@ class Hyper_Parameter_Optimization:
 
     def hyper_parameter_optimization(self, number_of_trials=100):
         """Example of hyper parameter optimization"""
-        self.hpo_trial_num = 0
-        self.loss_history = {}
 
         # initialize optuna study
         study = optuna.create_study()
@@ -102,6 +105,7 @@ class Hyper_Parameter_Optimization:
 
         #
         results = HPO_Study(study.best_trial.number, study.best_params, 
-                            study.best_value, study.trials, self.name, self.loss_history)
+                            study.best_value, study.trials, self.name, 
+                            self.max_epochs, self.loss_history)
 
         return results
