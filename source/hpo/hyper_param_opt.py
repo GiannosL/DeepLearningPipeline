@@ -39,7 +39,8 @@ class Hyper_Parameter_Optimization:
                     criterion=nn.CrossEntropyLoss(), 
                     optimizer=torch.optim.Adam):
         
-        loss_history = []
+        self.hpo_trial_num += 1
+        self.loss_history[f"trial_{self.hpo_trial_num}"] = []
         optimizer = optimizer(model.parameters(), lr=itta)
 
         # Start 5-fold cross validation
@@ -48,13 +49,15 @@ class Hyper_Parameter_Optimization:
             X_train, X_test = self.X[train_index], self.X[test_index]
             y_train, y_test = self.y[train_index], self.y[test_index]
 
+            self.loss_history[f"trial_{self.hpo_trial_num}"].append([])
+
             for i in range(epochs):
                 i += 1
                 y_pred = model.forward(X_train)
 
                 # 
                 loss = criterion(y_pred, y_train)
-                loss_history.append(loss.item())
+                self.loss_history[f"trial_{self.hpo_trial_num}"][-1].append(loss.item())
 
                 # backpropagation
                 optimizer.zero_grad()
@@ -88,6 +91,9 @@ class Hyper_Parameter_Optimization:
 
     def hyper_parameter_optimization(self, number_of_trials=100):
         """Example of hyper parameter optimization"""
+        self.hpo_trial_num = 0
+        self.loss_history = {}
+
         # initialize optuna study
         study = optuna.create_study()
         
@@ -96,6 +102,6 @@ class Hyper_Parameter_Optimization:
 
         #
         results = HPO_Study(study.best_trial.number, study.best_params, 
-                            study.best_value, study.trials, self.name)
+                            study.best_value, study.trials, self.name, self.loss_history)
 
         return results
