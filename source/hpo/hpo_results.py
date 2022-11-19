@@ -36,9 +36,13 @@ class HPO_Study:
 
     def plot_trials(self, working_directory: str):
         """Not ready for deployment yet!"""
+        # get loss history data
         df = self.save_trials()
         
+        # plot set-up
         plt.figure(figsize=(10, 7))
+
+        # make plot
         for i in range(df.shape[1]):
             plt.plot([i for i in range(1, 1+df[f"trial_{i+1}"].shape[0])], df[f"trial_{i+1}"], label=f"trial_{i+1}")
         
