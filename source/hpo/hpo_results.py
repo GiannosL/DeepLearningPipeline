@@ -37,7 +37,6 @@ class HPO_Study:
     def plot_trials(self, working_directory: str):
         """Not ready for deployment yet!"""
         df = self.save_trials()
-        print(df)
         
         plt.figure(figsize=(10, 7))
         for i in range(df.shape[1]):
