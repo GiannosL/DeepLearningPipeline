@@ -66,6 +66,8 @@ def edit_model_file(working_directory, model: ANN):
 
     # loss over epochs
     model_file = model_file.replace("_TRAINING_CURVE_", f"{working_directory}results/plots/training_loss.png")
+    # loss over trials
+    model_file = model_file.replace("_HPO_LOSSES_", f"{working_directory}results/plots/hpo_loss.png")
 
     model_file = model_file.replace("main.html", "main_report.html")
     model_file = model_file.replace("model.html", "model_report.html")
