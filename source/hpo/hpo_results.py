@@ -28,7 +28,6 @@ class HPO_Study:
     def save_trials(self):
         loss_dataframe = pd.DataFrame()
         for key in self.loss_history:
-            print(key)
             # Only make use of the first CV-dataset
             loss_dataframe[key] = pd.Series(self.loss_history[key][0])
         
