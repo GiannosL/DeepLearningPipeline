@@ -9,6 +9,22 @@ class DeepLearner:
         self.config = configuration
         self.model_name = configuration["model_name"]
         self.work_directory = configuration["work_directory"]
+
+    def run_auto(self):
+        # build dataset
+        self.prepare_input()
+
+        # perform hyper parameter optimization
+        self.optimize_hyper_parameters()
+
+        # train model
+        self.train_model()
+
+        # run on test set
+        self.make_predictions()
+
+        # save prediction results and generate report
+        self.save_results()
     
     def prepare_input(self):
         self.training_set, self.test_set = generate_datasets(continuous_feature_list=self.config["features_continuous"].split(","), 
