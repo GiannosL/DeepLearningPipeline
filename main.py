@@ -7,49 +7,28 @@ from source.setup.terminal_colours import terminal_colors
 from source.hpo.hyper_param_opt import Hyper_Parameter_Optimization
 from source.data.data_preparation import generate_datasets, standardize_data
 
+from source.DeepLearner import DeepLearner
+
 # collect input arguments
 args = collect_arguments()
 
 # read configuration
 config = setup_run(args.configfile) 
 
-# build datasets
-training_set, test_set = generate_datasets(continuous_feature_list=config["features_continuous"].split(","), 
-                                           categorical_feature_list=config["features_categorical"].split(","),
-                                           database_yaml=config["database_yaml"])
+# set-up my model
+study_model = DeepLearner(configuration=config)
 
-# plot principal components of the dataset
-print(terminal_colors.okcyan + "[ ] Calculationg PCs of input dataset.\n" + terminal_colors.endc)
-training_set.plot_principal_components(save_path=config["work_directory"])
-test_set.plot_principal_components(save_path=config["work_directory"], train_test_flag="test")
+# build dataset
+study_model.prepare_input()
 
 # perform hyper parameter optimization
-hpo = Hyper_Parameter_Optimization(training_set, n_trials=config["hpo_trials"], model_name=config["model_name"])
-hpo.data.show_results()
-hpo.data.plot_trials(working_directory=config["work_directory"])
+study_model.optimize_hyper_parameters()
 
-# start up main model
-my_model = ANN(input_layer_nodes=training_set.feature_number, hyper_params=hpo.data.param_set,
-               output_layer_nodes=training_set.class_number, name=config["model_name"])
-my_model.setup_training(cv_split=hpo.cross_validation_split, learning_rate=hpo.data.param_set["learning_rate"], 
-                        epochs=hpo.data.param_set["n_epochs"])
-
-# Normalize data
-training_set, test_set = standardize_data(training_set, test_set)
-
-# train model, use standardized data
-my_model.train_model(X=training_set.feature_matrix, y_true=training_set.target,
-                     work_directory=config["work_directory"])
+# train model
+study_model.train_model()
 
 # run on test set
-preds = my_model.predict(X=test_set.feature_matrix, y=test_set.target)
-preds.plot(plt_name=f"{config['work_directory']}results/plots/discrimination_pcs.png")
+study_model.make_predictions()
 
-# save prediction results
-preds.save_results(working_dir=config["work_directory"], model_name=config["model_name"])
-
-# save model
-my_model.save(f"{config['work_directory']}results/{config['model_name']}")
-
-# generate report
-make_report(config["work_directory"], model=my_model, trn_data=training_set, tst_data=test_set)
+# save prediction results and generate report
+study_model.save_results()
