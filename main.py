@@ -14,6 +14,11 @@ config = setup_run(args.configfile)
 # set-up my model
 study_model = DeepLearner(configuration=config)
 
+"""
+# do auto run
+study_model.run_auto()
+"""
+
 # build dataset
 study_model.prepare_input()
 
