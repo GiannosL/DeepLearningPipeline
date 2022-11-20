@@ -122,7 +122,7 @@ class ANN(nn.Module):
         plt.clf()
     
     def save(self, name):
-        torch.save(self.state_dict(), name)
+        torch.save(self.state_dict(), f"{name}.pt")
         print(f"Model saved as: {name}.")
 
 

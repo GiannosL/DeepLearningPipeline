@@ -48,5 +48,8 @@ preds.plot(plt_name=f"{config['work_directory']}results/plots/discrimination_pcs
 # save prediction results
 preds.save_results(working_dir=config["work_directory"], model_name=config["model_name"])
 
+# save model
+my_model.save(f"{config['work_directory']}results/{config['model_name']}")
+
 # generate report
 make_report(config["work_directory"], model=my_model, trn_data=training_set, tst_data=test_set)
