@@ -65,3 +65,7 @@ class Predictions:
         
         plt.savefig(plt_name, dpi=1000)
         plt.clf()
+
+    def save_results(self, working_dir: str, model_name: str):
+        # put a timestamp maybe.
+        self.y_true.iloc[:, :-1].to_csv(f"{working_dir}results/{model_name}_results.tsv", sep="\t", index=False)

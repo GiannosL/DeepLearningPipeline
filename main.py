@@ -45,5 +45,8 @@ my_model.train_model(X=training_set.feature_matrix, y_true=training_set.target,
 preds = my_model.predict(X=test_set.feature_matrix, y=test_set.target)
 preds.plot(plt_name=f"{config['work_directory']}results/plots/discrimination_pcs.png")
 
+# save prediction results
+preds.save_results(working_dir=config["work_directory"], model_name=config["model_name"])
+
 # generate report
 make_report(config["work_directory"], model=my_model, trn_data=training_set, tst_data=test_set)
