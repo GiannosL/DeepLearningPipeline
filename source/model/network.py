@@ -123,7 +123,7 @@ class ANN(nn.Module):
     
     def save(self, name):
         torch.save(self.state_dict(), f"{name}.pt")
-        print(f"Model saved as: {name}.")
+        print(f"Model saved as: {name}.pt")
 
 
 def convert_to_tensor(df: pd.DataFrame, target=False):
