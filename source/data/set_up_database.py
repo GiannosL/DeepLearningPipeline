@@ -1,5 +1,6 @@
 import os
 import numpy as np
+from source.setup.terminal_colours import terminal_colors as tc
 
 
 def create_file_structure(db_path):
@@ -9,7 +10,7 @@ def create_file_structure(db_path):
         try:
             os.mkdir(f"{db_path}/{dire}")
         except:
-            print(f"Directory {db_path}/{dire} already exists!")
+            print(tc.warning + f"[X] Directory '{db_path}/{dire}' already exists!" + tc.endc)
             return 0
 
 
@@ -49,7 +50,8 @@ def read_tsv(filename):
 def split_data(split_perc: float, indiv_number: int):
     # do an 80-20 split
     train_indivs = int(indiv_number * split_perc)
-    print(f"Number of individuas: {indiv_number}, {train_indivs} training, {indiv_number-train_indivs}")
+    print(tc.bold + f"Number of individuas: {indiv_number}")
+    print(f"Split: {train_indivs} training, {indiv_number-train_indivs} testing" + tc.endc)
 
     train_indices = np.random.choice(range(0, indiv_number), size=train_indivs, replace=False)
     test_indices = []
@@ -85,28 +87,30 @@ def generate_yaml(database_path: str, feature_names: list):
 
 def setup_database(database_path: str, input_file: str, train_perc: float):
     #
-    print("Creating file structure")
+    print(tc.okgreen + "[ ] Creating file structure" + tc.endc)
     create_file_structure(db_path = database_path)
 
     #
-    print("Reading input file")
+    print(tc.okgreen + "[ ] Reading input file" + tc.endc)
     file_ext = input_file.split(".")[-1]
     if file_ext == "csv":
         headers, file_contents = read_csv(input_file)
     elif file_ext == "tsv":
         headers, file_contents = read_tsv(input_file)
     else:
-        raise Exception("File does not end with '.tsv' or '.csv'. Please format and rename file accordingly!")
+        err = tc.fail + "File does not end with '.tsv' or '.csv'. "
+        err += "Please format and rename file accordingly!" + tc.endc
+        raise Exception(err)
     
     #
-    print("Splitting data into train and test")
+    print(tc.okgreen + "[ ] Splitting data into train and test" + tc.endc)
     train_indices, test_indices = split_data(train_perc, len(file_contents[0]))
 
     #
-    print("Saving results")
+    print(tc.okgreen + "Saving results" + tc.endc)
     save_contents("training", headers, file_contents, train_indices, database_path)
     save_contents("testing", headers, file_contents, test_indices, database_path)
 
     #
-    print("Creating yaml file")
+    print(tc.okgreen + "Creating yaml file" + tc.endc)
     generate_yaml(database_path, feature_names=headers)
