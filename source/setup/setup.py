@@ -5,6 +5,9 @@ def read_configuration(filename):
     with open(filename, "r") as f:
         config = yaml.full_load(f)
     
+    if not config["work_directory"].endswith("/"):
+        config["work_directory"] += "/"
+    
     return config
 
 
@@ -27,9 +30,9 @@ def setup_run(config_file):
     # set-up file structure
     print("\n")
     create_directories(config["work_directory"])
-    create_directories(f"{config['work_directory']}/report/")
-    create_directories(f"{config['work_directory']}/results/")
-    create_directories(f"{config['work_directory']}/results/plots/")
+    create_directories(f"{config['work_directory']}report/")
+    create_directories(f"{config['work_directory']}results/")
+    create_directories(f"{config['work_directory']}results/plots/")
     print("\n")
     
     return config
