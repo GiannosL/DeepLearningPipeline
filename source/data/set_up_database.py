@@ -76,8 +76,8 @@ def generate_yaml(database_path: str, feature_names: list):
     testing_module = "testing:\n"
 
     for feature in feature_names:
-        training_module += f"\t{feature}: '{database_path}/feature_{feature}.csv'\n"
-        testing_module += f"\t{feature}: '{database_path}/feature_{feature}.csv'\n"
+        training_module += f"  {feature}: '{database_path}/database/training/feature_{feature}.csv'\n"
+        testing_module += f"  {feature}: '{database_path}/database/testing/feature_{feature}.csv'\n"
     
     yaml_file = training_module + "\n" + testing_module
 
