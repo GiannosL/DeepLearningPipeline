@@ -1,4 +1,5 @@
 from source.model.network import ANN
+from source.data.set_up_database import setup_database
 from source.output.report_generation import make_report
 from source.setup.terminal_colours import terminal_colors
 from source.hpo.hyper_param_opt import Hyper_Parameter_Optimization
@@ -9,6 +10,9 @@ class DeepLearner:
         self.config = configuration
         self.model_name = configuration["model_name"]
         self.work_directory = configuration["work_directory"]
+    
+    def create_database(database_path: str, input_file: str, train_perc: float=0.8):
+        setup_database(database_path=database_path, input_file=input_file, train_perc=train_perc)
 
     def run_auto(self):
         # build dataset

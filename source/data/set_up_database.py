@@ -83,7 +83,7 @@ def generate_yaml(database_path: str, feature_names: list):
         f.write(yaml_file)
 
 
-def setup_database(database_path: str, input_file: str, train_perc: float =0.8):
+def setup_database(database_path: str, input_file: str, train_perc: float):
     #
     print("Creating file structure")
     create_file_structure(db_path = database_path)
