@@ -46,10 +46,10 @@ def read_tsv(filename):
     return headers, columns
 
 
-def split_data(split_perc: float, data_len: int):
+def split_data(split_perc: float, indiv_number: int):
     # do an 80-20 split
-    indiv_number = data_len-1
     train_indivs = int(indiv_number * split_perc)
+    print(f"Number of individuas: {indiv_number}, {train_indivs} training, {indiv_number-train_indivs}")
 
     train_indices = np.random.choice(range(0, indiv_number), size=train_indivs, replace=False)
     test_indices = []
@@ -86,11 +86,9 @@ def setup_database(database_path: str, input_file: str, train_perc: float =0.8):
     
     #
     print("Splitting data into train and test")
-    train_indices, test_indices = split_data(train_perc, len(file_contents)-1)
+    train_indices, test_indices = split_data(train_perc, len(file_contents[0]))
 
     #
-    print(train_indices)
-    print(file_contents)
     print("Saving results")
     save_contents("training", headers, file_contents, train_indices, database_path)
     save_contents("testing", headers, file_contents, test_indices, database_path)
