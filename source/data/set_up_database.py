@@ -69,6 +69,20 @@ def save_contents(type_string: str, header, contents_col, indices, db_path: str)
                     f.write(f"{j}\n")
 
 
+def generate_yaml(database_path: str, feature_names: list):
+    training_module = "training:\n"
+    testing_module = "testing:\n"
+
+    for feature in feature_names:
+        training_module += f"\t{feature}: '{database_path}/feature_{feature}.csv'\n"
+        testing_module += f"\t{feature}: '{database_path}/feature_{feature}.csv'\n"
+    
+    yaml_file = training_module + "\n" + testing_module
+
+    with open(f"{database_path}/database/features.yaml", "w+") as f:
+        f.write(yaml_file)
+
+
 def setup_database(database_path: str, input_file: str, train_perc: float =0.8):
     #
     print("Creating file structure")
@@ -92,3 +106,7 @@ def setup_database(database_path: str, input_file: str, train_perc: float =0.8):
     print("Saving results")
     save_contents("training", headers, file_contents, train_indices, database_path)
     save_contents("testing", headers, file_contents, test_indices, database_path)
+
+    #
+    print("Creating yaml file")
+    generate_yaml(database_path, feature_names=headers)
