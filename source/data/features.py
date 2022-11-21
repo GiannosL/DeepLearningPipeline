@@ -78,7 +78,7 @@ class Input_data:
             self.column_names.append(new_feature.name)
     
     def get_class_number(self):
-        self.class_number = self.target["condition"].nunique()
+        self.class_number = self.target["target"].nunique()
 
     def standardize(self):
         """This will be used exclusively for the PCA"""
@@ -108,7 +108,7 @@ class Input_data:
         b = f"PC-{b}"
 
         # target_list
-        target_list = self.target["condition"].tolist()
+        target_list = self.target["target"].tolist()
 
         # PCA
         pcs, eigvals = self.pca(normalize)

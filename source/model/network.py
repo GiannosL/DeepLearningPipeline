@@ -133,6 +133,6 @@ def convert_to_tensor(df: pd.DataFrame, target=False):
     the target values then use proper format.
     """
     if target:
-        return torch.LongTensor(df["condition"].values)
+        return torch.LongTensor(df["target"].values)
     else:
         return torch.FloatTensor(df.values)

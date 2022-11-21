@@ -20,9 +20,9 @@ def generate_datasets(continuous_feature_list, categorical_feature_list, databas
         test_set.add_feature(Feature(feat, data_dictionary=database, dataset_flag="test", continuous=False))
 
     # add target 
-    target = Feature("condition", data_dictionary=database, dataset_flag="train", target_feature=True)
+    target = Feature("target", data_dictionary=database, dataset_flag="train", target_feature=True)
     training_set.add_feature(target)
-    target = Feature("condition", data_dictionary=database, dataset_flag="test", target_feature=True)
+    target = Feature("target", data_dictionary=database, dataset_flag="test", target_feature=True)
     test_set.add_feature(target)
 
     return training_set, test_set

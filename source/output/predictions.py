@@ -25,7 +25,7 @@ class Predictions:
         results = y_true
         results["prediction"] = y_pred
 
-        results["cond_pred_sub"] = results["condition"] - results["prediction"]
+        results["cond_pred_sub"] = results["target"] - results["prediction"]
 
         correct = results[results["cond_pred_sub"] == 0]
         
@@ -51,7 +51,7 @@ class Predictions:
         
         fig, ax = plt.subplots(1, 2, figsize=(10, 7))
         pcs, eigvals = self.pca()
-        pcs["y_true"] = self.y_true["condition"]
+        pcs["y_true"] = self.y_true["target"]
         pcs["y_pred"] = self.y_pred
 
         ax[0].scatter(pcs["PC-1"], pcs["PC-2"], c=pcs["y_true"], edgecolors="black")
