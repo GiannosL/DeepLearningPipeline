@@ -1,3 +1,4 @@
+import shutil
 import numpy as np
 from source.model.network import ANN
 from source.data.features import Input_data
@@ -96,3 +97,7 @@ def make_report(working_directory, model, trn_data: Input_data, tst_data: Input_
     save_html(f"{working_directory}report/main_report.html", main_file)
     save_html(f"{working_directory}report/model_report.html", model_file)
     save_html(f"{working_directory}report/results_report.html", results_file)
+
+    # copy tab-icon
+    shutil.copy(src="source/templates/eye.png", dst=f"{working_directory}report/eye.png")
+    
