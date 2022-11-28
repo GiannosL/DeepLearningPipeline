@@ -22,6 +22,7 @@ In order to use this tool you need to first install the following packages in yo
     <li>Pandas</li>
     <li>MatPlotLib</li>
     <li>PyTorch</li>
+    <li>SciKit-learn</li>
 </ul>
 </p>
 
