@@ -15,6 +15,16 @@ adjusted to the number of input features and the number of output nodes is autom
 <em>At the moment the model can only use continuous variables as input!</em>
 </p>
 
+<p>
+In order to use this tool you need to first install the following packages in your python environment:
+<ul>
+    <li>NumPy</li>
+    <li>Pandas</li>
+    <li>MatPlotLib</li>
+    <li>PyTorch</li>
+</ul>
+</p>
+
 <h2>Use guide</h2>
 
 <h3>Data set-up</h3>
