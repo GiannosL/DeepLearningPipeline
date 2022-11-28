@@ -16,6 +16,7 @@ adjusted to the number of input features and the number of output nodes is autom
 </p>
 
 <p>
+This script runs on <strong>Python3</strong>.
 In order to use this tool you need to first install the following packages in your python environment:
 <ul>
     <li>NumPy</li>
