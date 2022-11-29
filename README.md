@@ -37,7 +37,7 @@
     should look. The dataset can be downloaded from Kaggle: 
 
     [Heart Disease Dataset](https://www.kaggle.com/datasets/yasserh/heart-disease-dataset?resource=download)
-    <br>
+
     I am also providing the iris-dataset which was initially used to develop the model but it only contains 
     continuous variables.
 </p>
