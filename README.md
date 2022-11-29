@@ -34,7 +34,10 @@ In order to use this tool you need to first install the following packages in yo
 <p>
 In order to use the pipeline, the input data needs to be organised in a specific (yet simple) way.
 In my repository I am using a heart-disease dataset as an example to demonstrate how the input files 
-should look. The dataset can be downloaded from Kaggle: [Heart Disease Dataset](https://www.kaggle.com/datasets/yasserh/heart-disease-dataset?resource=download)
+should look. The dataset can be downloaded from Kaggle: 
+
+[Heart Disease Dataset](https://www.kaggle.com/datasets/yasserh/heart-disease-dataset?resource=download)
+
 <br>
 I am also providing the iris-dataset which was initially used to develop the model but it only contains 
 continuous variables.
