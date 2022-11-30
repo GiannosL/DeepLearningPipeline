@@ -62,18 +62,18 @@ training:
     <feature_1>: "/path/to/file_1.csv"
     <feature_2>: "/path/to/file_2.csv"
 
-    condition: "/path/to/target_file.csv"
+    target: "/path/to/target_file.csv"
 
 testing:
     <feature_1>: "/path/to/file_1.csv"
     <feature_2>: "/path/to/file_2.csv"
 
-    condition: "/path/to/target_file.csv"
+    target: "/path/to/target_file.csv"
 ````
 
 <p>
     The target file should contain the class for each individual encoded as 0,1,... <br>
-    The variable pointing to the target file should be named <strong>"condition"</strong> always. 
+    The variable pointing to the target file should be named <strong>"target"</strong> always. 
     The variables for the features do not matter in our naming scheme.
 </p>
 
