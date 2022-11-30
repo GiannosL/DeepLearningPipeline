@@ -93,7 +93,7 @@ testing:
 
 <h3>Command</h3>
 The pipeline has a few command line arguments (currently only one) to help with automation when running. The 
-argument <em>--configfile \<path_to_file\></em> receives the path to the yaml configuration file.
+argument <em>--configfile</em> receives the path to the yaml configuration file.
 
 
 ```
