@@ -6,6 +6,6 @@ model_name: "Model-42"
 hpo_trials: 1000
 
 # Input data
-database_yaml: "path/to/features.yaml"
+database_yaml: "iris_dataset/dataset/features.yaml"
 features_continuous: "petal_length,petal_width,sepal_length,sepal_width"
 features_categorical: ""

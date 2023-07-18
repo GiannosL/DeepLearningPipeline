@@ -1,15 +1,14 @@
 #!/usr/bin/env python3
-from source.setup.setup import setup_run
-from source.setup.arguments import collect_arguments
+from source.setup.setup import SetUpUtilities
 
 
 from source.DeepLearner import DeepLearner
 
 # collect input arguments
-args = collect_arguments()
+args = SetUpUtilities.collect_arguments()
 
 # read configuration
-config = setup_run(args.configfile) 
+config = SetUpUtilities.setup_run(args.configfile) 
 
 # set-up my model
 study_model = DeepLearner(configuration=config)
