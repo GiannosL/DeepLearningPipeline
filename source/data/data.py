@@ -25,7 +25,14 @@ class Dataset:
                                                                     y=y_total,
                                                                     test_s=0.2, 
                                                                     rand_st=42)
+        # collect feature data
+        self._n_input_features: int = X_total.shape[1]
+        # TODO: this works only for categorical features
+        self._n_output_features: int = y_total.nunique()
+
         print(f'{tc.okgreen}Dataset loaded!{tc.endc}')
+        print(f'Number of input features:\t{self.input_features()}')
+        print(f'Number of output features:\t{self.output_features()}')
 
     def _parse_dataset(self, 
                        dp: Path, 
@@ -78,3 +85,9 @@ class Dataset:
     
     def test_set(self) -> dict[str, DataFrame]:
         return self._test
+    
+    def input_features(self) -> int:
+        return self._n_input_features
+    
+    def output_features(self) -> int:
+        return self._n_output_features
