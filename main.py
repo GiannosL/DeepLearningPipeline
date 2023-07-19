@@ -1,22 +1,12 @@
 #!/usr/bin/env python3
-from source.setup.setup import SetUpUtilities
-
-
-from source.DeepLearner import DeepLearner
-
-# collect input arguments
-args = SetUpUtilities.collect_arguments()
+from source.setup.configuration import ConfigurationSetup
 
 # read configuration
-config = SetUpUtilities.setup_run(args.configfile) 
-
-# set-up my model
-study_model = DeepLearner(configuration=config)
+config = ConfigurationSetup()
 
 """
 # do auto run
 study_model.run_auto()
-"""
 
 # build dataset
 study_model.prepare_input()
@@ -32,3 +22,4 @@ study_model.make_predictions()
 
 # save prediction results and generate report
 study_model.save_results()
+"""
