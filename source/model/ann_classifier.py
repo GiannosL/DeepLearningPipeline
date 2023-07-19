@@ -1,6 +1,8 @@
 import torch
 import torch.nn as nn
 from pathlib import Path
+import matplotlib.pyplot as plt
+from pandas import Series, get_dummies
 
 from source.data.data import Dataset
 from source import TerminalColours as tc
@@ -17,10 +19,9 @@ class ANN_Classifier:
         
         # model training parameters
         self._lr = 0.01
-        self._epochs = 100
-        self._opt = torch.optim.SGD()
-        self._loss = nn.CrossEntropyLoss(self.model.parameters,
-                                         lr=self._lr)
+        self._epochs = 10000
+        self._opt = torch.optim.SGD(self.model.parameters(), lr=self._lr)
+        self._loss = nn.CrossEntropyLoss()
         
         print(f'{tc.okgreen}Model is ready!{tc.endc}')
     
@@ -51,7 +52,7 @@ class ANN_Classifier:
         # prepare data
         training_set = self._data.training_set()
         x = torch.from_numpy(training_set['X'].to_numpy()).float()
-        y = torch.from_numpy(training_set['y'].to_numpy)
+        y = self._convert_target(y=training_set['y'])
 
         # start training
         loss_history: list = []
@@ -59,14 +60,24 @@ class ANN_Classifier:
             # predict
             y_pred = self.model(x)
             # evaluate model performance through loss
-            loss = self._loss(y_pred, y)
+            loss = self._loss(y_pred, y.float())
             loss_history.append(loss.item())
             # back propagation
             self.model.zero_grad()
             loss.backward()
             self._opt.step()
+        
+        print(f'{tc.okgreen}Model training is complete!{tc.endc}')
+        print(f'Loss in final epoch: {loss_history[-1]}')
+        self.plot_loss_history(loss_history=loss_history)
 
-        final_loss = loss_history[-1]
+    def _convert_target(self, y: Series) -> torch.Tensor:
+        """
+        convert categorical to one-hot
+        """
+        y = get_dummies(y, dtype=int)
+
+        return torch.LongTensor(y.to_numpy())
     
     def save_model(self, name: str) -> None:
         torch.save(self.model.state_dict(), f'{name}.pt')
@@ -74,3 +85,10 @@ class ANN_Classifier:
     
     def load_model(self, pt_file: Path) -> None:
         self.model.load_state_dict(torch.load(pt_file))
+
+    def plot_loss_history(self, loss_history: list[float]) -> None:
+        plt.plot(range(1, self._epochs+1), loss_history)
+        plt.title('Loss history')
+        plt.xlabel('Epoch')
+        plt.ylabel('Loss')
+        plt.show()
