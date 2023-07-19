@@ -69,5 +69,5 @@ class ConfigurationSetup:
         
         return formatted_dict
     
-    def __getitem__(self, key: str) -> str | Path:
+    def __getitem__(self, key: str) -> list[str] | Path:
         return self._config[key]

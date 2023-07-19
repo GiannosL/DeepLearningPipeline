@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
+from source.data.data import Dataset
 from source.setup.configuration import ConfigurationSetup
 
 # read configuration
 config = ConfigurationSetup()
 
+# dataset 
+data = Dataset(configuration=config)
 """
 # do auto run
 study_model.run_auto()
