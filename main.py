@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from source.data.data import Dataset
-from source.model.ann import ANN_Classifier
+from source.model.ann_classifier import ANN_Classifier
 from source.setup.configuration import ConfigurationSetup
 
 # read configuration
