@@ -3,6 +3,7 @@ from pathlib import Path
 from pandas import DataFrame
 from sklearn.model_selection import train_test_split
 
+from source import TerminalColours as tc
 from source.setup.configuration import ConfigurationSetup
 
 
@@ -19,11 +20,12 @@ class Dataset:
             target_col='target'
         )
 
-        #
+        # train test split
         self._train, self._test = self._train_validation_test_split(X=X_total, 
                                                                     y=y_total,
                                                                     test_s=0.2, 
                                                                     rand_st=42)
+        print(f'{tc.okgreen}Dataset loaded!{tc.endc}')
 
     def _parse_dataset(self, 
                        dp: Path, 
@@ -38,7 +40,7 @@ class Dataset:
         for item in categorical_features:
             data_types[item] = object
         
-        return pd.read_csv(dp, dtype=data_types)
+        return pd.read_csv(dp, sep='\t', dtype=data_types)
     
     def _split_target_features(self,
                                features: list[str],

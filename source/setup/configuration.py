@@ -2,7 +2,7 @@ import argparse
 from pathlib import Path
 from yaml import safe_load
 
-from source import NECESSARY_COLUMNS
+from source import YAML_NECESSARY_VARIABLES
 
 
 class ConfigurationSetup:
@@ -10,7 +10,9 @@ class ConfigurationSetup:
         # path to the configuration file
         config_str = self._collect_arguments()
         # configuration as dictionary
-        self._config = self._read_configuration(filename=config_str)
+        config_dirty = self._read_configuration(filename=config_str)
+        # format the configuration
+        self._config = self._validate_configuration(config=config_dirty)
 
     def _collect_arguments(self) -> str:
         """
@@ -21,7 +23,7 @@ class ConfigurationSetup:
         # add an argument
         parser.add_argument("--configfile", type=str, required=True)
         
-        return parser.parse_args()['configfile']
+        return parser.parse_args().configfile
     
     def _read_configuration(self, filename: str) -> dict[str,str]:
         """
@@ -38,7 +40,7 @@ class ConfigurationSetup:
         raise FileNotFoundError(f'Configuration file not found in path: {my_path}')
     
     def _variable_existence(self, config_var_list: list[str]) -> None:
-        for element in NECESSARY_COLUMNS:
+        for element in YAML_NECESSARY_VARIABLES:
             if element not in config_var_list:
                 raise ValueError(f'Value \"{element}\" not in configuration file.')
     

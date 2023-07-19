@@ -1,4 +1,4 @@
-class terminal_colors:
+class TerminalColours:
     header = '\033[95m'
     okblue = '\033[94m'
     okcyan = '\033[96m'
@@ -10,7 +10,7 @@ class terminal_colors:
     underline = '\033[4m'
 
 
-NECESSARY_COLUMNS: list[str] = [
+YAML_NECESSARY_VARIABLES: list[str] = [
     'database',
     'features_continuous',
     'features_categorical',
