@@ -5,6 +5,7 @@ from sklearn.model_selection import train_test_split
 
 from source.setup.configuration import ConfigurationSetup
 
+
 class Dataset:
     def __init__(self, configuration: ConfigurationSetup) -> None:
         self._df = self._parse_dataset(dp=configuration['database'],
