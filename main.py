@@ -1,23 +1,23 @@
 #!/usr/bin/env python3
-from source.setup.setup import setup_run
-from source.setup.arguments import collect_arguments
-
-
-from source.DeepLearner import DeepLearner
-
-# collect input arguments
-args = collect_arguments()
+from source.data.data import Dataset
+from source.model.ann_classifier import ANN_Classifier
+from source.setup.configuration import ConfigurationSetup
 
 # read configuration
-config = setup_run(args.configfile) 
+config = ConfigurationSetup()
 
-# set-up my model
-study_model = DeepLearner(configuration=config)
+# dataset 
+data = Dataset(configuration=config)
+
+# model building
+model = ANN_Classifier(dataset=data)
+
+# train model
+model.train()
 
 """
 # do auto run
 study_model.run_auto()
-"""
 
 # build dataset
 study_model.prepare_input()
@@ -33,3 +33,4 @@ study_model.make_predictions()
 
 # save prediction results and generate report
 study_model.save_results()
+"""
