@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 from source.data.data import Dataset
+from source.model.ann_regressor import ANN_Regressor
 from source.model.ann_classifier import ANN_Classifier
 from source.setup.configuration import ConfigurationSetup
 
@@ -11,6 +12,7 @@ data = Dataset(configuration=config)
 
 # model building
 model = ANN_Classifier(dataset=data)
+#model = ANN_Regressor(dataset=data)
 
 # train model
 model.train()

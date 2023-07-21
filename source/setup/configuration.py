@@ -6,9 +6,13 @@ from source import YAML_NECESSARY_VARIABLES
 
 
 class ConfigurationSetup:
-    def __init__(self) -> None:
+    def __init__(self, 
+                 manual: str = '') -> None:
         # path to the configuration file
-        config_str = self._collect_arguments()
+        if manual:
+            config_str = manual
+        else:
+            config_str = self._collect_arguments()
         # configuration as dictionary
         config_dirty = self._read_configuration(filename=config_str)
         # format the configuration
