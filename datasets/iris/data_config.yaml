@@ -1,0 +1,4 @@
+# Input data
+database: 'datasets/iris/data.tsv'
+features_continuous: 'sepal_length,sepal_width,petal_length,petal_width'
+features_categorical: ''
