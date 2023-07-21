@@ -1,0 +1,4 @@
+# Input data
+database: 'datasets/dummy/data.tsv'
+features_continuous: 'feature-1,feature-2,feature-3'
+features_categorical: ''
