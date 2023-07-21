@@ -15,3 +15,9 @@ YAML_NECESSARY_VARIABLES: list[str] = [
     'features_continuous',
     'features_categorical',
 ]
+
+DATASETS_LIST: list[str] = ['Classifier', 'Regressor']
+DATASETS_MAP: dict[str,str] = {
+    'Regressor': 'datasets/dummy/data_config.yaml',
+    'Classifier': 'datasets/iris/data_config.yaml',
+}
